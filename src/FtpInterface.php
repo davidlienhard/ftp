@@ -137,7 +137,7 @@ interface FtpInterface
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fput())
      * @return          void
      */
-    public function fput(resource $fp, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function fput($fp, string $remote, $mode = "auto", bool $nb = false) : void;
 
 
     /**
@@ -156,7 +156,7 @@ interface FtpInterface
      * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @return          void
      */
-    public function nb_fput(resource $fp, string $remote, $mode = "auto") : void;
+    public function nb_fput($fp, string $remote, $mode = "auto") : void;
 
     /**
      * puts a directory with all contents on the server
@@ -219,7 +219,7 @@ interface FtpInterface
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fget())
      * @return          void
      */
-    public function fget(resource $fp, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function fget($fp, string $remote, $mode = "auto", bool $nb = false) : void;
 
     /**
      * gets a file not blocking from the server and returns a filepointer
@@ -237,7 +237,7 @@ interface FtpInterface
      * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @return          void
      */
-    public function nb_fget(resource $fp, string $remote, $mode = "auto") : void;
+    public function nb_fget($fp, string $remote, $mode = "auto") : void;
 
     /**
      * gets a directory with all contents from the server

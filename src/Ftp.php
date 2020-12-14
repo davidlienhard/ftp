@@ -413,11 +413,15 @@ class Ftp implements FtpInterface
      * @uses            Ftp::getMode()
      * @uses            Ftp::debug()
      */
-    public function fput(resource $fp, string $remote, $mode = "auto", bool $nb = false) : void
+    public function fput($fp, string $remote, $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
         $this->sanityCheck(__FUNCTION__);
+
+        if (!is_resource($fp)) {
+            throw new \TypeError("\$fp is not a resource");
+        }
 
         // get the upload mode (ascii|binary)
         if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
@@ -462,8 +466,12 @@ class Ftp implements FtpInterface
      * @return          void
      * @uses            Ftp::fput()
      */
-    public function nb_fput(resource $fp, string $remote, $mode = "auto") : void
+    public function nb_fput($fp, string $remote, $mode = "auto") : void
     {
+        if (!is_resource($fp)) {
+            throw new \TypeError("\$fp is not a resource");
+        }
+
         $this->fput($fp, $remote, $mode, true);
     }
 
@@ -641,11 +649,15 @@ class Ftp implements FtpInterface
      * @uses            FTP_BINARY
      * @uses            FTP_FAILED
      */
-    public function fget(resource $fp, string $remote, $mode = "auto", bool $nb = false) : void
+    public function fget($fp, string $remote, $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
         $this->sanityCheck(__FUNCTION__);
+
+        if (!is_resource($fp)) {
+            throw new \TypeError("\$fp is not a resource");
+        }
 
         if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
             // $mode = $this->getMode($remote);
@@ -689,8 +701,12 @@ class Ftp implements FtpInterface
      * @return          void
      * @uses            Ftp::fget()
      */
-    public function nb_fget(resource $fp, string $remote, $mode = "auto") : void
+    public function nb_fget($fp, string $remote, $mode = "auto") : void
     {
+        if (!is_resource($fp)) {
+            throw new \TypeError("\$fp is not a resource");
+        }
+
         $this->fget($local, $remote, $mode, true);
     }
 
