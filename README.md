@@ -1,2 +1,2 @@
-# davidlienhard/database
-🐘 php library for easy access to databases
+# davidlienhard/ftp
+🐘 php library for easy use of ftp functions
