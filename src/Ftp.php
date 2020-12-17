@@ -4,7 +4,7 @@
  *
  * @package         tourBase
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.0, 14.12.2020
+ * @version         1.0.1, 17.12.2020
  * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
  */
@@ -26,7 +26,7 @@ use \DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
  * the use of ftp functions easier.
  *
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.0, 14.12.2020
+ * @version         1.0.1, 17.12.2020
  * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
 */
@@ -321,7 +321,7 @@ class Ftp implements FtpInterface
      * puts a file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
+     * @version         1.0.1, 17.12.2020
      * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
@@ -345,7 +345,7 @@ class Ftp implements FtpInterface
         // sanity check
         if (!file_exists($local)) {
             $this->debug("local file '".$local."' does not exist", __FUNCTION__);
-            throw new FtpException("local file '".$local."' does not exist", __FUNCTION__);
+            throw new FtpException("local file '".$local."' does not exist");
         }
 
         // get transfer mode
