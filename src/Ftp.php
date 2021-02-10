@@ -4,8 +4,6 @@
  *
  * @package         tourBase
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.1, 17.12.2020
- * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
  */
 
@@ -26,110 +24,84 @@ use \DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
  * the use of ftp functions easier.
  *
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.1, 17.12.2020
- * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
 */
 class Ftp implements FtpInterface
 {
-    /**
-     * optional logging object to use for debugging
-     * @var     \DavidLienhard\Log\LogInterface
-     */
-    private $log;
+    /** the type of operating system */
+    private string $sysType;
 
-    /**
-     * the type of operating system
-     * @var         string
-     */
-    private $sysType;
-
-    /**
-     * the password to use for anyonymous connections
-     * @var         string
-     */
-    private $anonymousPassword = "qwertz@anonymous.net";
+    /** the password to use for anyonymous connections */
+    private string $anonymousPassword = "qwertz@anonymous.net";
 
     /**
      * all file-endings for which the ascii upload should be used
-     * @var         array
+     * @var     string[]
      */
-    private $ascii = [
-        "asp", "bat", "c", "ccp", "csv", "h", "htm", "html",
-        "shtml", "ini", "log", "php", "pl", "perl",
-        "sh", "sql", "txt", "cgi", "xml", "lock",
-        "json", "xml", "yml"
+    private array $ascii = [
+        "asp",
+        "bat",
+        "c",
+        "ccp",
+        "csv",
+        "h",
+        "htm",
+        "html",
+        "shtml",
+        "ini",
+        "log",
+        "php",
+        "pl",
+        "perl",
+        "sh",
+        "sql",
+        "txt",
+        "cgi",
+        "lock",
+        "json",
+        "xml",
+        "yml"
     ];
 
-    /**
-     * the time used for ftp connections
-     * @var         float
-     */
-    private $time = 0;
+    /** the time used for ftp connections */
+    private float $time = 0;
 
-    /**
-     * the hostname to connect to
-     * @var         string
-     */
-    private $host;
+    /** the hostname to connect to */
+    private string $host;
 
-    /**
-     * the port to connect to
-     * @var         int
-     */
-    private $port;
+    /** the port to connect to */
+    private int $port;
 
-    /**
-     * the connection timeout
-     * @var         int
-     */
-    private $timeout;
+    /** the connection timeout */
+    private int $timeout;
 
-    /**
-     * the username to login with
-     * @var         string
-     */
-    private $user;
+    /** the username to login with */
+    private string $user;
 
-    /**
-     * the password to login with
-     * @var         string
-     */
-    private $pass;
+    /** the password to login with */
+    private ?string $pass;
 
     /**
      * the range to calculate the portnumber
      * for active connections if the php functions
      * are not enabled.
-     * @var         string
+     * @var     int[]
      */
-    private $portrange = [ 150, 200 ];
+    private array $portrange = [ 150, 200 ];
 
     /**
      * the ip of this server (the php client)
      * used for active connections without
      * the php functions
-     * @var         string
      */
-    private $ip = null;
+    private ?string $ip = null;
 
-    /**
-     * passive mode.
-     * true = on
-     * false = off
-     * @var         bool
-     */
-    private $pasv = false;
-
-    /**
-     * print debug messages or not
-     * @var         bool
-     */
-    private $debug = false;
+    /** passive mode */
+    private bool $pasv = false;
 
     /**
      * The ftp connection resource
-     * @var         resource
+     * @var     resource
      */
     private $ftp;
 
@@ -141,8 +113,6 @@ class Ftp implements FtpInterface
      * the classes socket and server exist.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool                                    $debug  turn debugging on or off.
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
@@ -150,7 +120,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::$debug
      * @uses            Ftp::$log
      */
-    public function __construct(bool $debug = false, ?LogInterface $log = null)
+    public function __construct(private bool $debug = false, private ?LogInterface $log = null)
     {
         $this->debug = $debug;
         $this->log = $log;
@@ -160,15 +130,12 @@ class Ftp implements FtpInterface
      * connects to the ftp-server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $host           host to connect to
      * @param           string          $user           username to connect with
      * @param           string          $pass           password to connect with. or null to use anonymous password
      * @param           int             $port           port to connect to
      * @param           int             $timeout        timeout in seconds
-     * @return          void
      * @uses            Ftp::debug()
      * @uses            Ftp::$ftp
      * @uses            Ftp::$host
@@ -201,13 +168,15 @@ class Ftp implements FtpInterface
 
         // connect
         $this->debug("connecting to '".$host.":".$port."'", __FUNCTION__);
-        $this->ftp = @ftp_connect($host, $port);
+        $ftp = @ftp_connect($host, $port);
 
         // connection failed
-        if ($this->ftp === false) {
+        if ($ftp === false) {
             $this->debug("connection failed", __FUNCTION__);
             throw new FtpConnectException("could not connect to the host");
         }
+
+        $this->ftp = $ftp;
 
         // login
         $this->debug("logging in with '".$user."'", __FUNCTION__);
@@ -220,7 +189,8 @@ class Ftp implements FtpInterface
         }
 
         // set servers system type
-        $this->sysType = @ftp_systype($this->ftp);
+        $sysType = @ftp_systype($this->ftp);
+        $sysType = $sysType !== false ? $sysType : "";
 
 
         // add time used
@@ -233,11 +203,9 @@ class Ftp implements FtpInterface
      * returns the content of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $dir        the directory
-     * @return          array
+     * @return          array<int, array<string, int|string>>
      * @uses            Ftp::$ftp
      * @uses            Ftp::analyzeDir()
      * @uses            Ftp::debug()
@@ -256,16 +224,19 @@ class Ftp implements FtpInterface
             throw new FtpException("could not get rawlist");
         }
 
-        $newlist = [ ];
+        $newlist = [];
         for ($i = 0; $i < count($list); $i++) {
-            $entry = null;
             $buffer = $this->analyzeDir($list[$i]);
-            if ($buffer[0] == 0 || $buffer[0] == 2) {       // file and link
-                $entry = $buffer[2];
-                $newlist[] = [ $entry, 0 ];
-            } elseif ($buffer[0] == 1) {                    // directory
-                $entry = $buffer[2];
-                $newlist[] = [ $entry, 1 ];
+            if ($buffer['type'] === 0 || $buffer['type'] === 2) {   // file and link
+                $newlist[] = [
+                    "name" => $buffer['name'],
+                    "type" => 0
+                ];
+            } elseif ($buffer['type'] == 1) {                       // directory
+                $newlist[] = [
+                    "name" => $buffer['name'],
+                    "type" => 1
+                ];
             }
         }
 
@@ -284,11 +255,9 @@ class Ftp implements FtpInterface
      * returns the content of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $dir        the directory
-     * @return          array
+     * @return          mixed[]
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      */
@@ -321,14 +290,11 @@ class Ftp implements FtpInterface
      * puts a file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.1, 17.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_put())
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::getMode()
      * @uses            Ftp::debug()
@@ -336,7 +302,7 @@ class Ftp implements FtpInterface
      * @uses            FTP_BINARY
      * @uses            FTP_FAILED
      */
-    public function put(string $local, string $remote, $mode = "auto", bool $nb = false) : void
+    public function put(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -383,16 +349,13 @@ class Ftp implements FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::put()
      */
-    public function nb_put(string $local, string $remote, $mode = "auto") : void
+    public function nb_put(string $local, string $remote, int | string $mode = "auto") : void
     {
         $this->put($local, $remote, $mode, true);
     }
@@ -401,19 +364,16 @@ class Ftp implements FtpInterface
      * puts a with {@link fopen()} opened file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fput())
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::getMode()
      * @uses            Ftp::debug()
      */
-    public function fput($fp, string $remote, $mode = "auto", bool $nb = false) : void
+    public function fput($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -425,16 +385,15 @@ class Ftp implements FtpInterface
 
         // get the upload mode (ascii|binary)
         if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
-            // $mode = $this->getMode($local);
             $mode = FTP_ASCII;
         }
 
         $function = $nb ? "ftp_nb_fput" : "ftp_fput";
 
         $this->debug("uploading file using ".$function."()", __FUNCTION__);
-        $result = @$function($this->ftp, $fp, $remote, $mode);
+        $result = @$function($this->ftp, $remote, $fp, (int) $mode);
 
-        if ($result === false || $result === FTP_FAILED) {
+        if ($result === false) {
             $this->debug("could not put file on server", __FUNCTION__);
             throw new FtpException("could not put file on server");
         }
@@ -457,16 +416,13 @@ class Ftp implements FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fput()
      */
-    public function nb_fput($fp, string $remote, $mode = "auto") : void
+    public function nb_fput($fp, string $remote, int | string $mode = "auto") : void
     {
         if (!is_resource($fp)) {
             throw new \TypeError("\$fp is not a resource");
@@ -479,19 +435,16 @@ class Ftp implements FtpInterface
      * puts a directory with all contents on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          void
      * @uses            Ftp::mkdir()
      * @uses            Ftp::putDir()
      * @uses            Ftp::put()
      */
-    public function putDir(string $local, string $remote, $mode = "auto", $failfast = true) : void
+    public function putDir(string $local, string $remote, int | string $mode = "auto", bool $failfast = true) : void
     {
         $start = microtime(true);
 
@@ -537,8 +490,8 @@ class Ftp implements FtpInterface
                         throw $e;
                     }
                 }
-            }
-        }
+            }//end if
+        }//end while
         closeDir($dir);
 
         if ($error) {
@@ -561,14 +514,11 @@ class Ftp implements FtpInterface
      * gets a file from the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_get())
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::getMode()
      * @uses            Ftp::$time
@@ -576,7 +526,7 @@ class Ftp implements FtpInterface
      * @uses            FTP_ASCII
      * @uses            FTP_BINARY
      */
-    public function get(string $local, string $remote, $mode = "auto", bool $nb = false) : void
+    public function get(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -590,10 +540,10 @@ class Ftp implements FtpInterface
         $function = $nb ? "ftp_nb_get" : "ftp_get";
 
         $this->debug("downloading file using ".$function."()", __FUNCTION__);
-        $result = @$function($this->ftp, $local, $remote, $mode);
+        $result = @$function($this->ftp, $local, $remote, (int) $mode);
 
         // download failed
-        if ($result === false || $result === FTP_FAILED) {
+        if ($result === false) {
             $this->debug("could not get file from server", __FUNCTION__);
             throw new FtpException("could not get file from server");
         }
@@ -615,16 +565,13 @@ class Ftp implements FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local filepointer
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fget()
      */
-    public function nb_get(string $local, string $remote, $mode = "auto") : void
+    public function nb_get(string $local, string $remote, int | string $mode = "auto") : void
     {
         $this->get($local, $remote, $mode, true);
     }
@@ -633,14 +580,11 @@ class Ftp implements FtpInterface
      * gets a file from the server and returs a filepointer
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fget())
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::getMode()
      * @uses            Ftp::debug()
@@ -649,7 +593,7 @@ class Ftp implements FtpInterface
      * @uses            FTP_BINARY
      * @uses            FTP_FAILED
      */
-    public function fget($fp, string $remote, $mode = "auto", bool $nb = false) : void
+    public function fget($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -660,17 +604,16 @@ class Ftp implements FtpInterface
         }
 
         if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
-            // $mode = $this->getMode($remote);
             $mode = FTP_ASCII;
         }
 
         $function = $nb ? "ftp_nb_fget" : "ftp_fget";
 
         $this->debug("downloading file using ".$function."()", __FUNCTION__);
-        $result = @ftp_fget($this->ftp, $fp, $remote, $mode);
+        $result = @ftp_fget($this->ftp, $fp, $remote, (int) $mode);
 
         // download failed
-        if ($result === false || $result === FTP_FAILED) {
+        if ($result === false) {
             $this->debug("could not get file from server", __FUNCTION__);
             throw new FtpException("could not get file from server");
         }
@@ -692,45 +635,39 @@ class Ftp implements FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fget()
      */
-    public function nb_fget($fp, string $remote, $mode = "auto") : void
+    public function nb_fget($fp, string $remote, int | string $mode = "auto") : void
     {
         if (!is_resource($fp)) {
             throw new \TypeError("\$fp is not a resource");
         }
 
-        $this->fget($local, $remote, $mode, true);
+        $this->fget($fp, $remote, $mode, true);
     }
 
     /**
      * gets a directory with all contents from the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          void
      * @uses            Ftp::dirList()
      * @uses            Ftp::getDir()
      * @uses            Ftp::get()
      */
-    public function getDir(string $local, string $remote, $mode = "auto", $failfast = true) : void
+    public function getDir(string $local, string $remote, int | string $mode = "auto", bool $failfast = true) : void
     {
         $start = microtime(true);
 
-        $this->sanityCheck();
+        $this->sanityCheck(__FUNCTION__);
 
         if (file_exists($local) && !is_dir($local)) {
             $this->debug("local path '".$local."' is no directory", __FUNCTION__);
@@ -744,10 +681,15 @@ class Ftp implements FtpInterface
 
         $dir = $this->dirList($remote);
         foreach ($dir as $object) {
-            if ($object[1] == 1) {
+            if ($object['type'] === 1) {
                 try {
-                    mkdir($local . DIRECTORY_SEPARATOR . $object);
-                    $this->getDir($local . DIRECTORY_SEPARATOR . $object, $remote."/".$object, $mode, $failfast);
+                    mkdir($local.DIRECTORY_SEPARATOR.$object['name']);
+                    $this->getDir(
+                        $local.DIRECTORY_SEPARATOR.$object['name'],
+                        $remote."/".$object['name'],
+                        $mode,
+                        $failfast
+                    );
                 } catch (FtpException $e) {
                     $error = true;
                     if ($failfast) {
@@ -756,15 +698,19 @@ class Ftp implements FtpInterface
                 }
             } else {
                 try {
-                    $this->get($local . DIRECTORY_SEPARATOR . $object, $remote."/".$object, $mode);
+                    $this->get(
+                        $local.DIRECTORY_SEPARATOR.$object['name'],
+                        $remote."/".$object['name'],
+                        $mode
+                    );
                 } catch (FtpException $e) {
                     $error = true;
                     if ($failfast) {
                         throw $e;
                     }
                 }
-            }
-        }
+            }//end if
+        }//end foreach
 
         if ($error) {
             $this->debug(
@@ -786,11 +732,8 @@ class Ftp implements FtpInterface
      * creates a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
      */
@@ -822,11 +765,8 @@ class Ftp implements FtpInterface
      * changes to another directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      * @uses            Ftp::$time
@@ -857,10 +797,7 @@ class Ftp implements FtpInterface
      * changes to the directory up
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      * @uses            Ftp::pwd()
@@ -894,12 +831,9 @@ class Ftp implements FtpInterface
      * changes the access rights of a file/directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int              $mode        the new access rights
      * @param           string           $filename    the filename
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::site()
      * @uses            Ftp::$time
@@ -916,9 +850,11 @@ class Ftp implements FtpInterface
         if (@ftp_chmod($this->ftp, $mode, $filename) === false) {
             $this->debug("could not change the mode. trying with the SITE command", __FUNCTION__);
 
-            if ($this->site($this->ftp, "CHMOD ".$mode." ".$filename) === false) {
+            try {
+                $this->site("CHMOD ".$mode." ".$filename);
+            } catch (FtpException $e) {
                 $this->debug("could not change the mode of '".$filename."' to '".$mode."'", __FUNCTION__);
-                throw new FtpException("could not change the mode of '".$filename."' to '".$mode."'");
+                throw new FtpException("could not change the mode of '".$filename."' to '".$mode."'", $e->getCode(), $e);
             }
         }
 
@@ -935,10 +871,7 @@ class Ftp implements FtpInterface
      * returns the current path
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          string
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      * @uses            Ftp::$time
@@ -966,19 +899,16 @@ class Ftp implements FtpInterface
         // add time used
         $this->time += microtime(true) - $start;
 
-        return $path;
+        return $folder;
     }
 
     /**
      * renames a file or directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $from        the current name
      * @param           string           $to          the new name
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
      */
@@ -1010,12 +940,9 @@ class Ftp implements FtpInterface
      * deletes directory on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $remote      the folder to delete
      * @param           bool             $recursive   recursively delete the folder or not
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
      * @uses            Ftp::rawlist()
@@ -1031,7 +958,7 @@ class Ftp implements FtpInterface
 
         $this->debug(($recursive ? "recursively " : "")."deleting folder '".$remote."'", __FUNCTION__);
 
-        if (!$recusive) {
+        if (!$recursive) {
             $buffer = @ftp_rmdir($this->ftp, $remote);
 
             if ($buffer === false) {
@@ -1047,12 +974,16 @@ class Ftp implements FtpInterface
 
         // init
         $i = 0;
-        $files = $folders = [ ];
+        $files = $folders = [];
         $statusnext = false;
-        $currentfolder = $directory;
+        $currentfolder = $remote;
 
         // get raw file listing
         $list = ftp_rawlist($this->ftp, $remote, true);
+
+        if ($list === false) {
+            throw new FtpException("unable to get raw list");
+        }
 
         // iterate listing
         foreach ($list as $current) {
@@ -1071,6 +1002,10 @@ class Ftp implements FtpInterface
 
             // split the data into chunks
             $split = preg_split("[ ]", $current, 9, PREG_SPLIT_NO_EMPTY);
+            if ($split === false) {
+                continue;
+            }
+
             $entry = $split[8];
             $isdir = $split[0][0] === "d";
 
@@ -1085,7 +1020,7 @@ class Ftp implements FtpInterface
             } else {
                 $files[] = $currentfolder."/".$entry;
             }
-        }
+        }//end foreach
 
         // delete all the files
         foreach ($files as $file) {
@@ -1096,11 +1031,11 @@ class Ftp implements FtpInterface
         // reverse sort the folders so the deepest directories are unset first
         rSort($folders);
         foreach ($folders as $folder) {
-            $this->rmdir($this->ftp, $folder);
+            $this->rmdir($folder, $recursive);
         }
 
         // delete the final folder and return its status
-        $buffer = ftp_rmDir($this->ftp, $directory);
+        ftp_rmdir($this->ftp, $remote);
 
         // add time used
         $this->time += microtime(true) - $start;
@@ -1110,11 +1045,8 @@ class Ftp implements FtpInterface
      * deletes file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $file      the file to delete
-     * @return          void
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
      */
@@ -1146,11 +1078,8 @@ class Ftp implements FtpInterface
      * returns the size of a file
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $filename    the name of the file
-     * @return          int
      * @uses            Ftp::$time
      */
     public function size(string $filename) : int
@@ -1163,9 +1092,9 @@ class Ftp implements FtpInterface
 
         $buffer = @ftp_size($this->ftp, $filename);
 
-        if ($buffer === false) {
-            $this->debug("could not get size of '".$from."'", __FUNCTION__);
-            throw new FtpException("could not get size of '".$from."'");
+        if ($buffer === -1) {
+            $this->debug("could not get size of '".$filename."'", __FUNCTION__);
+            throw new FtpException("could not get size of '".$filename."'");
         }
 
         $size = intval($buffer);
@@ -1185,16 +1114,13 @@ class Ftp implements FtpInterface
      * returns the size of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          int
      * @uses            Ftp::dirList()
      * @uses            Ftp::size()
      */
-    public function dirSize(string $dir, $failfast = false) : int
+    public function dirSize(string $dir, bool $failfast = false) : int
     {
         $start = microtime(true);
 
@@ -1207,9 +1133,9 @@ class Ftp implements FtpInterface
 
         $dirList = $this->dirList($dir);
         foreach ($dirList as $object) {
-            if ($object[1] == 1) {
+            if ($object['type'] == 1) {
                 try {
-                    $this->dirSize($dir."/".$object);
+                    $this->dirSize($dir."/".$object['name']);
                 } catch (FtpException $e) {
                     $error = true;
                     if ($failfast) {
@@ -1218,7 +1144,7 @@ class Ftp implements FtpInterface
                 }
             } else {
                 try {
-                    $size = $size + $this->size($dir."/".$object);
+                    $size = $size + $this->size($dir."/".$object['name']);
                 } catch (FtpException $e) {
                     $error = true;
                     if ($failfast) {
@@ -1226,7 +1152,7 @@ class Ftp implements FtpInterface
                     }
                 }
             }
-        }
+        }//end foreach
 
         if ($error) {
             $this->debug(
@@ -1248,11 +1174,8 @@ class Ftp implements FtpInterface
      * enables/disables the passive mode
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool             $mode        passive mode on/off
-     * @return          void
      * @uses            Ftp::debug()
      * @uses            Ftp::$time
      */
@@ -1261,7 +1184,7 @@ class Ftp implements FtpInterface
         $start = microtime(true);
         $this->sanityCheck(__FUNCTION__);
 
-        $this->debug(($mode ? "enabling" : "disabling") . " active mode", __FUNCTION__);
+        $this->debug(($mode ? "enabling" : "disabling")." active mode", __FUNCTION__);
 
         if ($mode === $this->pasv) {
             $this->debug("nothing to do", __FUNCTION__);
@@ -1290,11 +1213,8 @@ class Ftp implements FtpInterface
      * returns the date of the last modification from a file
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $filename    the name of the file
-     * @return          int
      * @uses            Ftp::$time
      */
     public function mdtm(string $filename) : int
@@ -1330,11 +1250,8 @@ class Ftp implements FtpInterface
      * will not be checked and just given to the ftp_site() function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $command     the command to send
-     * @return          void
      * @uses            Ftp::$time
      * @uses            Ftp::$ftp
      */
@@ -1369,11 +1286,8 @@ class Ftp implements FtpInterface
      * will not be checked and just given to the ftp_exec() function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $command     the command to send
-     * @return          void
      * @uses            Ftp::$time
      * @uses            Ftp::$ftp
      */
@@ -1405,8 +1319,6 @@ class Ftp implements FtpInterface
      * returns some information about the ftp connction
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int             $option      the option to return
      * @return          mixed
@@ -1442,12 +1354,9 @@ class Ftp implements FtpInterface
      * sets some information about the ftp connction
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
-     * @return          void
      * @uses            Ftp::$time
      */
     public function set_option(int $option, $value) : void
@@ -1460,7 +1369,7 @@ class Ftp implements FtpInterface
 
         $buffer = @ftp_set_option($this->ftp, $option, $value);
 
-        if ($option === false) {
+        if ($buffer === false) {
             $this->debug("could not set option on server", __FUNCTION__);
             throw new FtpException("could not set option on server");
         }
@@ -1478,10 +1387,7 @@ class Ftp implements FtpInterface
      * closes the ftp-connection
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          void
      * @uses            Ftp::debug()
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
@@ -1512,62 +1418,95 @@ class Ftp implements FtpInterface
     /**
      * analyses a line returned by ftp_rawlist
      *
+     * returns an assotive array with the following keys:
+     *   type (type of the object)
+     *    -1: invalid
+     *     0: file
+     *     1: folder
+     *     2: link
+     *
+     *   size (filesize in bytes)
+     *
+     *   name (name of the file/folder)
+     *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dirline     one line
-     * @return          array
-     * @access          private
+     * @return          array<string, int|string>
      * @uses            Ftp::$sysType
      */
-    public function analyzeDir($dirline)
+    public function analyzeDir(string $dirline) : array
     {
-        /* if (ereg("([-dl])[rwxst-]{9}",substr($dirline,0,10)))
-        {
-            $this->sysType="UNIX";
-        } */
-
         if (substr($dirline, 0, 5) == "total") {
             $this->debug("line begins with 'total'. invalid line", __FUNCTION__);
-            $entry[0] = -1;
+            $entry = [
+                "type" => -1,
+                "size" => 0,
+                "name" => ""
+            ];
         } elseif ($this->sysType == "Windows_NT") {
             $this->debug("server os is WINDOWS_NT", __FUNCTION__);
-            if (ereg("[-0-9]+ *[0-9:]+[PA]?M? +<DIR> {10}(.*)", $dirline, $regs)) {
+            if (preg_match("/[-0-9]+ *[0-9:]+[PA]?M? +<DIR> {10}(.*)/", $dirline, $regs)) {
                 $this->debug("object (".$regs[1].") is a directory", __FUNCTION__);
-                $entry[0] = 1;
-                $entry[1] = 0;
-                $entry[2] = $regs[1];
-            } elseif (ereg("[-0-9]+ *[0-9:]+[PA]?M? +([0-9]+) (.*)", $dirline, $regs)) {
+                $entry = [
+                    "type" => 1,
+                    "size" => 0,
+                    "name" => $regs[1] ?? ""
+                ];
+            } elseif (preg_match("/[-0-9]+ *[0-9:]+[PA]?M? +([0-9]+) (.*)/", $dirline, $regs)) {
                 $this->debug("object (".$regs[2].") is a file", __FUNCTION__);
-                $entry[0] = 0;
-                $entry[1] = $regs[1];
-                $entry[2] = $regs[2];
-            }
+                $entry = [
+                    "type" => 0,
+                    "size" => intval($regs[1] ?? 0),
+                    "name" => $regs[2] ?? ""
+                ];
+            } else {
+                $this->debug("invalid line", __FUNCTION__);
+                $entry = [
+                    "type" => -1,
+                    "size" => 0,
+                    "name" => ""
+                ];
+            }//end if
         } elseif ($this->sysType == "UNIX") {
             $this->debug("server os is UNIX", __FUNCTION__);
-            if (ereg("([-ld])[rwxst-]{9}.* ([0-9]*) [a-zA-Z]+ [0-9: ]*[0-9] (.+)", $dirline, $regs)) {
-                if ($regs[1] == "d") {
-                    $entry[0] = 1;
-                }
+            if (preg_match("/([-ld])[rwxst-]{9}.* ([0-9]*) [a-zA-Z]+ [0-9: ]*[0-9] (.+)/", $dirline, $regs)) {
+                $entry = [
+                    "type" => -1,
+                    "size" => intval($regs[2] ?? 0),
+                    "name" => $regs[3] ?? ""
+                ];
 
-                $entry[1] = $regs[2];
-                $entry[2] = $regs[3];
-
-                if ($regs[1] == "l") {
-                    $entry[0] = 2;
-                    if (ereg("(.+) ->.*", $entry[2], $regs)) {
-                        $entry[2] = $regs[1];
+                if (($regs[1] ?? "") === "d") {
+                    $entry['type'] = 1;
+                } elseif (($regs[1] ?? "") === "l") {
+                    $entry['type'] = 2;
+                    if (preg_match("/(.+) ->.*/", $entry['name'], $regs) && $regs !== false && isset($regs[1])) {
+                        $entry['name'] = $regs[1];
                     }
                 } else {
-                    $entry[0] = 1;
+                    $entry['type'] = 1;
                 }
-            }
-        }
+            } else {
+                $this->debug("invalid line", __FUNCTION__);
+                $entry = [
+                    "type" => -1,
+                    "size" => 0,
+                    "name" => ""
+                ];
+            }//end if
+        } else {
+            $this->debug("invalid line", __FUNCTION__);
+            $entry = [
+                "type" => -1,
+                "size" => 0,
+                "name" => ""
+            ];
+        }//end if
 
         $this->debug("filtering folder descriptors", __FUNCTION__);
-        if (($entry[2] == ".") || ($entry[2] == "..")) {
-            $entry[0] = 0;
+        if ($entry['name'] === "." || $entry['name'] === "..") {
+            $entry['type'] = 0;
         }
 
         return $entry;
@@ -1577,30 +1516,24 @@ class Ftp implements FtpInterface
      * sets the password to use for anonymous users
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $password           password to use
-     * @return          void
      * @uses            Ftp::anonymousPassword()
      */
     public function setAnonymousPassword(string $password) : void
     {
-        $this->anonymousPassword($password);
+        $this->anonymousPassword = $password;
     }
 
     /**
      * turns debugging on or off
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool            $debug              turn debug on or off
-     * @return          void
      * @uses            Ftp::$debug
      */
-    public function setDebug($debug = false) : void
+    public function setDebug(bool $debug = false) : void
     {
         $this->debug = $debug;
     }
@@ -1609,10 +1542,7 @@ class Ftp implements FtpInterface
      * returns the current state of debug
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          bool
      * @uses            Ftp::$debug
      */
     public function getDebug() : bool
@@ -1624,11 +1554,8 @@ class Ftp implements FtpInterface
      * checks if a file has to be up-/downloaded binary or with ascii
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $file        the filename
-     * @return          int
      * @access          private
      * @uses            Ftp::$ascii
      * @uses            FTP_ASCII
@@ -1661,12 +1588,9 @@ class Ftp implements FtpInterface
      * prints a debug message on the screen if required
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $message        the message to print
      * @param           string|null     $functionName   the name of the function calling this method
-     * @return          void
      * @access          private
      * @uses            Ftp::$debug
      * @uses            Ftp::$log
@@ -1677,7 +1601,7 @@ class Ftp implements FtpInterface
             return;
         }
 
-        $logString = $functionName !== false
+        $logString = $functionName !== null
             ? __CLASS__."->".$functionName."(): "
             : __CLASS__.": ";
 
@@ -1693,11 +1617,8 @@ class Ftp implements FtpInterface
      * sanity check
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $functionName       name of the function calling this method
-     * @return          void
      * @uses            Ftp::$ftp
      */
     private function sanityCheck(string $functionName) : void

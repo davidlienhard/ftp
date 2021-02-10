@@ -4,8 +4,6 @@
  *
  * @package         tourBase
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.0, 14.12.2020
- * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
  */
 
@@ -22,8 +20,6 @@ use \DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
  * contains methods for ftp transfers
  *
  * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @version         1.0.0, 14.12.2020
- * @since           1.0.0, 14.12.2020, created
  * @copyright       tourasia
 */
 interface FtpInterface
@@ -35,8 +31,6 @@ interface FtpInterface
      * the classes socket and server exist.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool                                    $debug  turn debugging on or off.
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
@@ -48,15 +42,12 @@ interface FtpInterface
      * connects to the ftp-server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $host           host to connect to
      * @param           string          $user           username to connect with
      * @param           string          $pass           password to connect with. or null to use anonymous password
      * @param           int             $port           port to connect to
      * @param           int             $timeout        timeout in seconds
-     * @return          void
      */
     public function connect(
         string $host,
@@ -70,11 +61,9 @@ interface FtpInterface
      * returns the content of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $dir        the directory
-     * @return          array
+     * @return          array<int, array<int, mixed>>
      */
     public function dirList(string $dir = "./") : array;
 
@@ -82,11 +71,9 @@ interface FtpInterface
      * returns the content of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $dir        the directory
-     * @return          array
+     * @return          string[]
      */
     public function nList(string $dir = "./") : array;
 
@@ -94,16 +81,13 @@ interface FtpInterface
      * puts a file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_put())
-     * @return          void
      */
-    public function put(string $local, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function put(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void;
 
 
     /**
@@ -114,30 +98,24 @@ interface FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_put(string $local, string $remote, $mode = "auto") : void;
+    public function nb_put(string $local, string $remote, int | string $mode = "auto") : void;
 
     /**
      * puts a with {@link fopen()} opened file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fput())
-     * @return          void
      */
-    public function fput($fp, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function fput($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void;
 
 
     /**
@@ -148,45 +126,46 @@ interface FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_fput($fp, string $remote, $mode = "auto") : void;
+    public function nb_fput($fp, string $remote, int | string $mode = "auto") : void;
 
     /**
      * puts a directory with all contents on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          void
      */
-    public function putDir(string $local, string $remote, $mode = "auto", $failfast = true) : void;
+    public function putDir(
+        string $local,
+        string $remote,
+        int | string $mode = "auto",
+        bool $failfast = true
+    ) : void;
 
     /**
      * gets a file from the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_get())
-     * @return          void
      */
-    public function get(string $local, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function get(
+        string $local,
+        string $remote,
+        int | string $mode = "auto",
+        bool $nb = false
+    ) : void;
 
     /**
      * gets a file not blocking from the server
@@ -196,30 +175,33 @@ interface FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local filepointer
      * @param           string           $remote      the remote file
-     * @param           bool             $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_get(string $local, string $remote, $mode = "auto") : void;
+    public function nb_get(
+        string $local,
+        string $remote,
+        int | string $mode = "auto"
+    ) : void;
 
     /**
      * gets a file from the server and returs a filepointer
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fget())
-     * @return          void
      */
-    public function fget($fp, string $remote, $mode = "auto", bool $nb = false) : void;
+    public function fget(
+        $fp,
+        string $remote,
+        int | string $mode = "auto",
+        bool $nb = false
+    ) : void;
 
     /**
      * gets a file not blocking from the server and returns a filepointer
@@ -229,40 +211,40 @@ interface FtpInterface
      * $nb in this function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @return          void
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_fget($fp, string $remote, $mode = "auto") : void;
+    public function nb_fget(
+        $fp,
+        string $remote,
+        int | string $mode = "auto"
+    ) : void;
 
     /**
      * gets a directory with all contents from the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
-     * @param           mixed            $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
+     * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          void
      */
-    public function getDir(string $local, string $remote, $mode = "auto", $failfast = true) : void;
+    public function getDir(
+        string $local,
+        string $remote,
+        int | string $mode = "auto",
+        bool $failfast = true
+    ) : void;
 
     /**
      * creates a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
-     * @return          void
      */
     public function mkdir(string $dir) : void;
 
@@ -270,11 +252,8 @@ interface FtpInterface
      * changes to another directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
-     * @return          void
      */
     public function chDir(string $dir) : void;
 
@@ -282,10 +261,7 @@ interface FtpInterface
      * changes to the directory up
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          void
      */
     public function cdup() : void;
 
@@ -293,12 +269,9 @@ interface FtpInterface
      * changes the access rights of a file/directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int              $mode        the new access rights
      * @param           string           $filename    the filename
-     * @return          void
      */
     public function chmod(int $mode, string $filename) : void;
 
@@ -306,10 +279,7 @@ interface FtpInterface
      * returns the current path
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          string
      */
     public function pwd() : string;
 
@@ -317,12 +287,9 @@ interface FtpInterface
      * renames a file or directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $from        the current name
      * @param           string           $to          the new name
-     * @return          void
      */
     public function rename(string $from, string $to) : void;
 
@@ -330,12 +297,9 @@ interface FtpInterface
      * deletes directory on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $remote      the folder to delete
      * @param           bool             $recursive   recursively delete the folder or not
-     * @return          void
      */
     public function rmdir(string $remote, bool $recursive = false) : void;
 
@@ -343,11 +307,8 @@ interface FtpInterface
      * deletes file on the server
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $file      the file to delete
-     * @return          void
      */
     public function delete(string $file) : void;
 
@@ -355,11 +316,8 @@ interface FtpInterface
      * returns the size of a file
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $filename    the name of the file
-     * @return          int
      */
     public function size(string $filename) : int;
 
@@ -367,24 +325,18 @@ interface FtpInterface
      * returns the size of a directory
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dir         the name of the directory
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @return          int
      */
-    public function dirSize(string $dir, $failfast = false) : int;
+    public function dirSize(string $dir, bool $failfast = false) : int;
 
     /**
      * enables/disables the passive mode
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool             $mode        passive mode on/off
-     * @return          void
      */
     public function pasv(bool $mode) : void;
 
@@ -392,11 +344,8 @@ interface FtpInterface
      * returns the date of the last modification from a file
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $filename    the name of the file
-     * @return          int
      */
     public function mdtm(string $filename) : int;
 
@@ -407,11 +356,8 @@ interface FtpInterface
      * will not be checked and just given to the ftp_site() function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $command     the command to send
-     * @return          void
      */
     public function site(string $command) : void;
 
@@ -422,11 +368,8 @@ interface FtpInterface
      * will not be checked and just given to the ftp_exec() function.
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $command     the command to send
-     * @return          void
      */
     public function exec(string $command) : void;
 
@@ -434,8 +377,6 @@ interface FtpInterface
      * returns some information about the ftp connction
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int             $option      the option to return
      * @return          mixed
@@ -446,12 +387,9 @@ interface FtpInterface
      * sets some information about the ftp connction
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
-     * @return          void
      */
     public function set_option(int $option, $value) : void;
 
@@ -459,10 +397,7 @@ interface FtpInterface
      * closes the ftp-connection
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          void
      */
     public function close() : void;
 
@@ -470,24 +405,18 @@ interface FtpInterface
      * analyses a line returned by ftp_rawlist
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string           $dirline     one line
-     * @return          array
-     * @access          private
+     * @return          string[]
      */
-    public function analyzeDir($dirline);
+    public function analyzeDir(string $dirline) : array;
 
     /**
      * sets the password to use for anonymous users
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           string          $password           password to use
-     * @return          void
      */
     public function setAnonymousPassword(string $password) : void;
 
@@ -495,22 +424,16 @@ interface FtpInterface
      * turns debugging on or off
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
      * @param           bool            $debug              turn debug on or off
-     * @return          void
      */
-    public function setDebug($debug = false) : void;
+    public function setDebug(bool $debug = false) : void;
 
     /**
      * returns the current state of debug
      *
      * @author          David Lienhard <david@t-error.ch>
-     * @version         1.0.0, 14.12.2020
-     * @since           1.0.0, 14.12.2020, created
      * @copyright       t-error.ch
-     * @return          bool
      */
     public function getDebug() : bool;
 }
