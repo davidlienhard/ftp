@@ -63,7 +63,7 @@ interface FtpInterface
      * @author          David Lienhard <david@t-error.ch>
      * @copyright       t-error.ch
      * @param           string          $dir        the directory
-     * @return          array<int, array<int, mixed>>
+     * @return          array<int, array<string, int|string>>
      */
     public function dirList(string $dir = "./") : array;
 
