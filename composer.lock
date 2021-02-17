@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51a6dc0ae40fb732a106348cac88c0d9",
+    "content-hash": "70150b7f7e9ec981d82888a983c50af3",
     "packages": [
         {
             "name": "davidlienhard/log",
@@ -241,6 +241,10 @@
                 "MIT"
             ],
             "description": "PHPStan - PHP Static Analysis Tool",
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "source": "https://github.com/phpstan/phpstan/tree/0.12.76"
+            },
             "funding": [
                 {
                     "url": "https://github.com/ondrejmirtes",
@@ -907,5 +911,5 @@
         "ext-ftp": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
