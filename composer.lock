@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b6079989de34c2db2ef002283a5ba67d",
+    "content-hash": "eeaa34200f25a78de1febe22c2e75080",
     "packages": [
         {
             "name": "davidlienhard/log",
