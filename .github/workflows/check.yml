@@ -34,6 +34,12 @@ jobs:
         key: ${{ runner.os }}-${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
         restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-
 
+    - name: "Cache PHPStan Result"
+      uses: actions/cache@v2
+      with:
+        path: ./tmp
+        key: "${{ runner.os }}-${{ matrix.php }}-phpstan-result-cache"
+
     - name: Validate composer.json and composer.lock
       run: composer validate
 
@@ -49,8 +55,8 @@ jobs:
     - name: Show changed files
       run: composer changed-files
 
-    - name: Run phpdoccheck
-      run: composer phpdoccheck-diff
-
     - name: Run phpcs
       run: composer phpcs-diff
+
+    - name: Run phpstan
+      run: composer phpstan
