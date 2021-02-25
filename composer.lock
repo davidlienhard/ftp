@@ -4,8 +4,82 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee9e2630de6bd9903d9e5b4fdefce98e",
+    "content-hash": "c75af24ae2429878da686f172fc2708b",
     "packages": [
+        {
+            "name": "davidlienhard/functioncaller",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidlienhard/functioncaller.git",
+                "reference": "9c6f19f2c1248ea9fec702a5c334d853265541d0"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://packages.tourbase.ch/dist/davidlienhard/functioncaller/davidlienhard-functioncaller-9c6f19f2c1248ea9fec702a5c334d853265541d0-zip-abc258.tar",
+                "reference": "9c6f19f2c1248ea9fec702a5c334d853265541d0",
+                "shasum": "1c03ae21ad5711fda1eb007d562c207540967791"
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0",
+                "slevomat/coding-standard": "^6.4",
+                "squizlabs/php_codesniffer": "^3"
+            },
+            "type": "libary",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "scripts": {
+                "changed-files": [
+                    "git diff --name-only origin/master"
+                ],
+                "phpcs": [
+                    "./vendor/bin/phpcs"
+                ],
+                "phpstan": [
+                    "./vendor/bin/phpstan analyse"
+                ],
+                "test": [
+                    "@phpcs",
+                    "@phpstan"
+                ],
+                "phpdoc": [
+                    "docker run --rm -v ${PWD}:/data phpdoc/phpdoc:3 run"
+                ],
+                "doc": [
+                    "@phpdoc"
+                ]
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "David Lienhard",
+                    "email": "david.lienhard@tourasia.ch",
+                    "homepage": "http://www.tourasia.ch/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "🐘 php library to call functions and ctahc triggered errors",
+            "homepage": "https://github.com/davidlienhard/functioncaller/",
+            "keywords": [
+                "errorhandler",
+                "library",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/davidlienhard/functioncaller/issues/",
+                "email": "david.lienhard@tourasia.ch",
+                "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.0"
+            },
+            "time": "2021-02-25T13:43:51+00:00"
+        },
         {
             "name": "davidlienhard/log",
             "version": "1.0.2",
