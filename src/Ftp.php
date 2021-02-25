@@ -1019,10 +1019,14 @@ class Ftp implements FtpInterface
         $currentfolder = $remote;
 
         // get raw file listing
-        $list = ftp_rawlist($this->ftp, $remote, true);
+        $caller = new FunctionCaller("ftp_rawlist", $this->ftp, $remote, true);
+        $list = $caller->getResult();
 
         if ($list === false) {
-            throw new FtpException("unable to get raw list");
+            $lastError = $caller->getLastError()?->getErrstr();
+            $errmsg = $lastError !== null ? " (".$lastError.")" : "";
+            $this->debug("unable to get raw list".$errmsg, __FUNCTION__);
+            throw new FtpException("unable to get raw list".$errmsg);
         }
 
         // iterate listing
