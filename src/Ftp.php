@@ -178,7 +178,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("connection failed".$errmsg, __FUNCTION__);
-            throw new FtpConnectException("could not connect to the host");
+            throw new FtpConnectException("could not connect to the host".$errmsg);
         }
 
         $this->ftp = $ftp;
@@ -193,7 +193,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not login".$errmsg, __FUNCTION__);
-            throw new FtpLoginException("unable to login");
+            throw new FtpLoginException("unable to login".$errmsg);
         }
 
         // set servers system type
@@ -233,7 +233,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get rawlist".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get rawlist");
+            throw new FtpException("could not get rawlist".$errmsg);
         }
 
         $newlist = [];
@@ -287,7 +287,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get directory list from server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get directory list from server");
+            throw new FtpException("could not get directory list from server".$errmsg);
         }
 
         $this->debug(
@@ -343,7 +343,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not put file (".$local.") on server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not put file (".$local.") on server");
+            throw new FtpException("could not put file (".$local.") on server".$errmsg);
         }
 
         $this->debug(
@@ -412,7 +412,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not put file on server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not put file on server");
+            throw new FtpException("could not put file on server".$errmsg);
         }
 
         $this->debug(
@@ -564,7 +564,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get file from server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get file from server");
+            throw new FtpException("could not get file from server".$errmsg);
         }
 
         $this->debug(
@@ -636,7 +636,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get file from server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get file from server");
+            throw new FtpException("could not get file from server".$errmsg);
         }
 
         $this->debug(
@@ -772,7 +772,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not create remote directory '".$dir."'".$errmsg);
-            throw new FtpException("could not create remote directory '".$dir."'");
+            throw new FtpException("could not create remote directory '".$dir."'".$errmsg);
         }
 
         $this->debug(
@@ -808,7 +808,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not change the directory to '".$dir."'".$errmsg, __FUNCTION__);
-            throw new FtpException("could not change the directory to '".$dir."'");
+            throw new FtpException("could not change the directory to '".$dir."'".$errmsg);
         }
 
         $this->debug(
@@ -844,7 +844,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not change the directory".$errmsg, __FUNCTION__);
-            throw new FtpException("could not change the directory");
+            throw new FtpException("could not change the directory".$errmsg);
         }
 
         $this->debug(
@@ -924,7 +924,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get working directory".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get working directory");
+            throw new FtpException("could not get working directory".$errmsg);
         }
 
         $this->debug(
@@ -962,7 +962,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not rename '".$from."' to '".$to."'".$errmsg, __FUNCTION__);
-            throw new FtpException("could not rename '".$from."' to '".$to."'");
+            throw new FtpException("could not rename '".$from."' to '".$to."'".$errmsg);
         }
 
         $this->debug(
@@ -1003,7 +1003,7 @@ class Ftp implements FtpInterface
                 $lastError = $caller->getLastError()?->getErrstr();
                 $errmsg = $lastError !== null ? " (".$lastError.")" : "";
                 $this->debug("could not remove the folder '".$remote."'".$errmsg, __FUNCTION__);
-                throw new FtpException("could not remove the folder '".$remote."'");
+                throw new FtpException("could not remove the folder '".$remote."'".$errmsg);
             }
 
             // add time used
@@ -1104,7 +1104,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not delete the file '".$file."'".$errmsg, __FUNCTION__);
-            throw new FtpException("could not delete the file '".$file."'");
+            throw new FtpException("could not delete the file '".$file."'".$errmsg);
         }
 
         $this->debug(
@@ -1139,7 +1139,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get size of '".$filename."'".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get size of '".$filename."'");
+            throw new FtpException("could not get size of '".$filename."'".$errmsg);
         }
 
         $size = intval($size);
@@ -1243,7 +1243,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not switch mode".$errmsg, __FUNCTION__);
-            throw new FtpException("could not switch mode");
+            throw new FtpException("could not switch mode".$errmsg);
         }
 
         $size = intval($size);
@@ -1280,7 +1280,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get last modification date from '".$filename."'".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get last modification date from '".$filename."'");
+            throw new FtpException("could not get last modification date from '".$filename."'".$errmsg);
         }
 
         $this->debug(
@@ -1320,7 +1320,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not execute the command".$errmsg, __FUNCTION__);
-            throw new FtpException("could not execute the command");
+            throw new FtpException("could not execute the command".$errmsg);
         }
 
         $this->debug(
@@ -1358,7 +1358,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not execute the command".$errmsg, __FUNCTION__);
-            throw new FtpException("could not execute the command");
+            throw new FtpException("could not execute the command".$errmsg);
         }
 
         $this->debug(
@@ -1394,7 +1394,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get option from server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not get option from server");
+            throw new FtpException("could not get option from server".$errmsg);
         }
 
         $this->debug(
@@ -1431,7 +1431,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not set option on server".$errmsg, __FUNCTION__);
-            throw new FtpException("could not set option on server");
+            throw new FtpException("could not set option on server".$errmsg);
         }
 
         $this->debug(
@@ -1465,7 +1465,7 @@ class Ftp implements FtpInterface
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not close the connection".$errmsg, __FUNCTION__);
-            throw new FtpException("could not close the connection");
+            throw new FtpException("could not close the connection".$errmsg);
         }
 
         $this->debug(
