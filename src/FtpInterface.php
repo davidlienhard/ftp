@@ -379,9 +379,8 @@ interface FtpInterface
      * @author          David Lienhard <david@t-error.ch>
      * @copyright       t-error.ch
      * @param           int             $option      the option to return
-     * @return          mixed
      */
-    public function get_option(int $option);
+    public function get_option(int $option): mixed;
 
     /**
      * sets some information about the ftp connction
@@ -391,7 +390,7 @@ interface FtpInterface
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
      */
-    public function set_option(int $option, $value) : void;
+    public function set_option(int $option, mixed $value) : void;
 
     /**
      * closes the ftp-connection

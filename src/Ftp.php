@@ -1380,10 +1380,9 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <david@t-error.ch>
      * @copyright       t-error.ch
      * @param           int             $option      the option to return
-     * @return          mixed
      * @uses            Ftp::$time
      */
-    public function get_option(int $option)
+    public function get_option(int $option): mixed
     {
         $start = microtime(true);
 
@@ -1421,7 +1420,7 @@ class Ftp implements FtpInterface
      * @param           mixed           $value          value of the option to set
      * @uses            Ftp::$time
      */
-    public function set_option(int $option, $value) : void
+    public function set_option(int $option, mixed $value) : void
     {
         $start = microtime(true);
 

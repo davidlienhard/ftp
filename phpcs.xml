@@ -2,112 +2,13 @@
 <ruleset name="tourBase coding standard">
     <description>tourBase coding standard</description>
 
-    <config name="installed_paths" value="../../slevomat/coding-standard"/><!-- relative path from PHPCS source location -->
-
     <!-- inherit rules -->
-    <rule ref="PSR2">
+    <rule ref="DavidLienhard">
         <exclude name="PSR1.Methods.CamelCapsMethodName"/>
     </rule>
 
-    <!-- disallow global keyword -->
-    <rule ref="Squiz.PHP.GlobalKeyword" />
-
-    <!-- force use of short array syntax ([ ])-->
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
-        <type>error</type>
-    </rule>
-
-    <!-- check whitespaces before and after operators -->
-    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
-        <properties>
-            <property name="ignoreNewlines" value="true" />
-        </properties>
-        <type>error</type>
-    </rule>
-
-    <!-- disallow and & or, force && and || -->
-    <rule ref="Squiz.Operators.ValidLogicalOperators">
-        <type>error</type>
-    </rule>
-
-    <!-- add generic php rule -->
-    <rule ref="Generic.PHP">
-        <exclude name="Generic.PHP.ClosingPHPTag" />
-        <exclude name="Generic.PHP.UpperCaseConstant.Found" />
-    </rule>
-
-    <!-- require strict types to be set -->
-    <rule ref="Generic.PHP.RequireStrictTypes">
-        <type>error</type>
-    </rule>
-
-    <!-- disallow silenced errors (@) -->
-    <!-- <rule ref="Generic.PHP.NoSilencedErrors">
-        <type>error</type>
-    </rule> //-->
-
-    <!-- extend line limit to 180 -->
-    <rule ref="Generic.Files.LineLength">
-        <properties>
-            <property name="lineLimit" value="180"/>
-            <property name="absoluteLineLimit" value="0"/>
-        </properties>
-    </rule>
-
-    <!-- no spacing around concat -->
-    <rule ref="Squiz.Strings.ConcatenationSpacing">
-        <properties>
-            <property name="ignoreNewlines" value="true"/>
-        </properties>
-    </rule>
-
-    <rule ref="Squiz.Arrays.ArrayDeclaration">
-        <exclude name="Squiz.Arrays.ArrayDeclaration.SingleLineNotAllowed" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.NoCommaAfterLast" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.KeyNotAligned" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.ValueNotAligned" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.NoComma" />
-        <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed" />
-    </rule>
-
-    <!-- Private methods MUST not be prefixed with an underscore -->
-    <rule ref="Squiz.NamingConventions.ValidFunctionName.PrivateNoUnderscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
-        <type>error</type>
-    </rule>
-
-    <!-- Private properties MUST not be prefixed with an underscore -->
-    <rule ref="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore">
-        <severity>0</severity>
-    </rule>
-    <rule ref="PSR2.Classes.PropertyDeclaration.Underscore">
-        <type>error</type>
-    </rule>
-
-    <!-- closing comment for long conditions -->
-    <rule ref="Squiz.Commenting.LongConditionClosingComment.Missing" />
-
-    <!-- closing brace of array must be on new line-->
-    <rule ref="Generic.Arrays.ArrayIndent"/>
-
-    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint" />
-    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint" />
-    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint" />
-
     <!-- Paths to check -->
     <file>src</file>
-
-    <!-- dont display warnings -->
-    <arg name="warning-severity" value="0"/>
-
-    <!-- parse only php files -->
-    <arg name="extensions" value="php"/>
-
-    <!-- show process -->
-    <arg value="p"/>
 
     <!-- folders / files to exclude -->
     <exclude-pattern>vendor/*</exclude-pattern>
