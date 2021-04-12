@@ -82,23 +82,24 @@
         },
         {
             "name": "davidlienhard/log",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:davidlienhard/log.git",
-                "reference": "b01b34bf6b66c626ee652e0cedf3dfb6bd0441a2"
+                "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://packages.tourbase.ch/dist/davidlienhard/log/davidlienhard-log-b01b34bf6b66c626ee652e0cedf3dfb6bd0441a2-zip-551291.tar",
-                "reference": "b01b34bf6b66c626ee652e0cedf3dfb6bd0441a2",
-                "shasum": "5625c17e6d1919f0933ee3ded8c8af7c5f55f3cc"
+                "url": "https://packages.tourbase.ch/dist/davidlienhard/log/davidlienhard-log-963c9b4efe8af8b222c4d44c6511d954e1602e2e-zip-dfa46d.tar",
+                "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e",
+                "shasum": "7b114810287d558e9dc8a1776a916921cfa649ea"
             },
             "require": {
-                "php": "^7.2|^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "dancryer/php-docblock-checker": "^1",
+                "davidlienhard/coding-standard": "^1",
+                "phpstan/phpstan": "^0",
                 "phpunit/phpunit": "^9",
                 "squizlabs/php_codesniffer": "^3"
             },
@@ -115,21 +116,17 @@
                 "phpunit": [
                     "./vendor/bin/phpunit"
                 ],
-                "phpdoccheck": [
-                    "./vendor/bin/phpdoccheck"
-                ],
-                "phpdoccheck-diff": [
-                    "@composer changed-files | xargs ls -d 2>/dev/null | ./vendor/bin/phpdoccheck --from-stdin"
-                ],
                 "phpcs": [
                     "./vendor/bin/phpcs"
                 ],
                 "phpcs-diff": [
                     "@composer changed-files | xargs ls -d 2>/dev/null | xargs ./vendor/bin/phpcs"
                 ],
+                "phpstan": [
+                    "./vendor/bin/phpstan analyse"
+                ],
                 "test": [
                     "@phpunit",
-                    "@phpdoccheck",
                     "@phpcs"
                 ]
             },
@@ -155,9 +152,9 @@
             "support": {
                 "issues": "https://github.com/davidlienhard/log/issues/",
                 "email": "david.lienhard@tourasia.ch",
-                "source": "https://github.com/davidlienhard/log/tree/1.0.2"
+                "source": "https://github.com/davidlienhard/log/tree/1.0.3"
             },
-            "time": "2020-11-30T10:00:10+00:00"
+            "time": "2021-04-12T09:09:33+00:00"
         }
     ],
     "packages-dev": [
