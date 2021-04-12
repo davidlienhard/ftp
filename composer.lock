@@ -8,24 +8,24 @@
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/functioncaller.git",
-                "reference": "9c6f19f2c1248ea9fec702a5c334d853265541d0"
+                "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://packages.tourbase.ch/dist/davidlienhard/functioncaller/davidlienhard-functioncaller-9c6f19f2c1248ea9fec702a5c334d853265541d0-zip-abc258.tar",
-                "reference": "9c6f19f2c1248ea9fec702a5c334d853265541d0",
-                "shasum": "1c03ae21ad5711fda1eb007d562c207540967791"
+                "url": "https://packages.tourbase.ch/dist/davidlienhard/functioncaller/davidlienhard-functioncaller-7f45fd69a8f1152a4f11179adebb7ca6dfa36719-zip-1ee647.tar",
+                "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719",
+                "shasum": "aa106d66823c61e4ff3f8078833cdca6b4344798"
             },
             "require": {
                 "php": "^8.0"
             },
             "require-dev": {
+                "davidlienhard/coding-standard": "^1",
                 "phpstan/phpstan": "^0",
-                "slevomat/coding-standard": "^6.4",
                 "squizlabs/php_codesniffer": "^3"
             },
             "type": "libary",
@@ -76,9 +76,9 @@
             "support": {
                 "issues": "https://github.com/davidlienhard/functioncaller/issues/",
                 "email": "david.lienhard@tourasia.ch",
-                "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.0"
+                "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.1"
             },
-            "time": "2021-02-25T13:43:51+00:00"
+            "time": "2021-04-12T09:05:20+00:00"
         },
         {
             "name": "davidlienhard/log",
