@@ -12,9 +12,6 @@ declare(strict_types=1);
 namespace DavidLienhard\Ftp;
 
 use \DavidLienhard\Log\LogInterface;
-use \DavidLienhard\Ftp\Exceptions\FtpException as FtpException;
-use \DavidLienhard\Ftp\Exceptions\ConnectException as FtpConnectException;
-use \DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
 
 /**
  * contains methods for ftp transfers
@@ -36,7 +33,7 @@ interface FtpInterface
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
      * @return          void
      */
-    public function __construct(bool $debug = false, ?LogInterface $log = null);
+    public function __construct(bool $debug = false, LogInterface|null $log = null);
 
     /**
      * connects to the ftp-server
@@ -52,7 +49,7 @@ interface FtpInterface
     public function connect(
         string $host,
         string $user,
-        ?string $pass,
+        string|null $pass,
         int $port = 21,
         int $timeout = 30
     ) : void;
@@ -87,7 +84,7 @@ interface FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_put())
      */
-    public function put(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void;
+    public function put(string $local, string $remote, int|string $mode = "auto", bool $nb = false) : void;
 
 
     /**
@@ -103,7 +100,7 @@ interface FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_put(string $local, string $remote, int | string $mode = "auto") : void;
+    public function nb_put(string $local, string $remote, int|string $mode = "auto") : void;
 
     /**
      * puts a with {@link fopen()} opened file on the server
@@ -115,7 +112,7 @@ interface FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fput())
      */
-    public function fput($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void;
+    public function fput($fp, string $remote, int|string $mode = "auto", bool $nb = false) : void;
 
 
     /**
@@ -131,7 +128,7 @@ interface FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      */
-    public function nb_fput($fp, string $remote, int | string $mode = "auto") : void;
+    public function nb_fput($fp, string $remote, int|string $mode = "auto") : void;
 
     /**
      * puts a directory with all contents on the server
@@ -146,7 +143,7 @@ interface FtpInterface
     public function putDir(
         string $local,
         string $remote,
-        int | string $mode = "auto",
+        int|string $mode = "auto",
         bool $failfast = true
     ) : void;
 
@@ -163,7 +160,7 @@ interface FtpInterface
     public function get(
         string $local,
         string $remote,
-        int | string $mode = "auto",
+        int|string $mode = "auto",
         bool $nb = false
     ) : void;
 
@@ -183,7 +180,7 @@ interface FtpInterface
     public function nb_get(
         string $local,
         string $remote,
-        int | string $mode = "auto"
+        int|string $mode = "auto"
     ) : void;
 
     /**
@@ -199,7 +196,7 @@ interface FtpInterface
     public function fget(
         $fp,
         string $remote,
-        int | string $mode = "auto",
+        int|string $mode = "auto",
         bool $nb = false
     ) : void;
 
@@ -219,7 +216,7 @@ interface FtpInterface
     public function nb_fget(
         $fp,
         string $remote,
-        int | string $mode = "auto"
+        int|string $mode = "auto"
     ) : void;
 
     /**
@@ -235,7 +232,7 @@ interface FtpInterface
     public function getDir(
         string $local,
         string $remote,
-        int | string $mode = "auto",
+        int|string $mode = "auto",
         bool $failfast = true
     ) : void;
 
