@@ -11,11 +11,11 @@ declare(strict_types=1);
 
 namespace DavidLienhard\Ftp;
 
-use \DavidLienhard\Log\LogInterface;
-use \DavidLienhard\Ftp\Exceptions\FtpException as FtpException;
-use \DavidLienhard\Ftp\Exceptions\ConnectException as FtpConnectException;
-use \DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
-use \DavidLienhard\FunctionCaller\Call as FunctionCaller;
+use DavidLienhard\Ftp\Exceptions\ConnectException as FtpConnectException;
+use DavidLienhard\Ftp\Exceptions\FtpException;
+use DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
+use DavidLienhard\FunctionCaller\Call as FunctionCaller;
+use DavidLienhard\Log\LogInterface;
 
 /**
  * contains methods for ftp transfers
@@ -80,7 +80,7 @@ class Ftp implements FtpInterface
     private string $user;
 
     /** the password to login with */
-    private ?string $pass;
+    private string|null $pass;
 
     /**
      * the range to calculate the portnumber
@@ -95,7 +95,7 @@ class Ftp implements FtpInterface
      * used for active connections without
      * the php functions
      */
-    private ?string $ip = null;
+    private string|null $ip = null;
 
     /** passive mode */
     private bool $pasv = false;
@@ -121,7 +121,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::$debug
      * @uses            Ftp::$log
      */
-    public function __construct(private bool $debug = false, private ?LogInterface $log = null)
+    public function __construct(private bool $debug = false, private LogInterface|null $log = null)
     {
         $this->debug = $debug;
         $this->log = $log;
@@ -149,7 +149,7 @@ class Ftp implements FtpInterface
     public function connect(
         string $host,
         string $user,
-        ?string $pass,
+        string|null $pass,
         int $port = 21,
         int $timeout = 30
     ) : void {
@@ -244,7 +244,7 @@ class Ftp implements FtpInterface
                     "name" => $buffer['name'],
                     "type" => 0
                 ];
-            } elseif ($buffer['type'] == 1) {                       // directory
+            } elseif ($buffer['type'] === 1) {                       // directory
                 $newlist[] = [
                     "name" => $buffer['name'],
                     "type" => 1
@@ -317,7 +317,7 @@ class Ftp implements FtpInterface
      * @uses            FTP_BINARY
      * @uses            FTP_FAILED
      */
-    public function put(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void
+    public function put(string $local, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -370,7 +370,7 @@ class Ftp implements FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::put()
      */
-    public function nb_put(string $local, string $remote, int | string $mode = "auto") : void
+    public function nb_put(string $local, string $remote, int|string $mode = "auto") : void
     {
         $this->put($local, $remote, $mode, true);
     }
@@ -388,7 +388,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::getMode()
      * @uses            Ftp::debug()
      */
-    public function fput($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void
+    public function fput($fp, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -399,7 +399,7 @@ class Ftp implements FtpInterface
         }
 
         // get the upload mode (ascii|binary)
-        if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
+        if ($mode !== FTP_ASCII && $mode !== FTP_BINARY) {
             $mode = FTP_ASCII;
         }
 
@@ -439,7 +439,7 @@ class Ftp implements FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fput()
      */
-    public function nb_fput($fp, string $remote, int | string $mode = "auto") : void
+    public function nb_fput($fp, string $remote, int|string $mode = "auto") : void
     {
         if (!is_resource($fp)) {
             throw new \TypeError("\$fp is not a resource");
@@ -461,7 +461,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::putDir()
      * @uses            Ftp::put()
      */
-    public function putDir(string $local, string $remote, int | string $mode = "auto", bool $failfast = true) : void
+    public function putDir(string $local, string $remote, int|string $mode = "auto", bool $failfast = true) : void
     {
         $start = microtime(true);
 
@@ -543,14 +543,14 @@ class Ftp implements FtpInterface
      * @uses            FTP_ASCII
      * @uses            FTP_BINARY
      */
-    public function get(string $local, string $remote, int | string $mode = "auto", bool $nb = false) : void
+    public function get(string $local, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
         $this->sanityCheck(__FUNCTION__);
 
         // get the upload mode
-        if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
+        if ($mode !== FTP_ASCII && $mode !== FTP_BINARY) {
             $mode = $this->getMode($remote);
         }
 
@@ -590,7 +590,7 @@ class Ftp implements FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fget()
      */
-    public function nb_get(string $local, string $remote, int | string $mode = "auto") : void
+    public function nb_get(string $local, string $remote, int|string $mode = "auto") : void
     {
         $this->get($local, $remote, $mode, true);
     }
@@ -612,7 +612,7 @@ class Ftp implements FtpInterface
      * @uses            FTP_BINARY
      * @uses            FTP_FAILED
      */
-    public function fget($fp, string $remote, int | string $mode = "auto", bool $nb = false) : void
+    public function fget($fp, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
         $start = microtime(true);
 
@@ -622,7 +622,7 @@ class Ftp implements FtpInterface
             throw new \TypeError("\$fp is not a resource");
         }
 
-        if ($mode != FTP_ASCII && $mode != FTP_BINARY) {
+        if ($mode !== FTP_ASCII && $mode !== FTP_BINARY) {
             $mode = FTP_ASCII;
         }
 
@@ -662,7 +662,7 @@ class Ftp implements FtpInterface
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @uses            Ftp::fget()
      */
-    public function nb_fget($fp, string $remote, int | string $mode = "auto") : void
+    public function nb_fget($fp, string $remote, int|string $mode = "auto") : void
     {
         if (!is_resource($fp)) {
             throw new \TypeError("\$fp is not a resource");
@@ -684,7 +684,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::getDir()
      * @uses            Ftp::get()
      */
-    public function getDir(string $local, string $remote, int | string $mode = "auto", bool $failfast = true) : void
+    public function getDir(string $local, string $remote, int|string $mode = "auto", bool $failfast = true) : void
     {
         $start = microtime(true);
 
@@ -1182,7 +1182,7 @@ class Ftp implements FtpInterface
 
         $dirList = $this->dirList($dir);
         foreach ($dirList as $object) {
-            if ($object['type'] == 1) {
+            if ($object['type'] === 1) {
                 try {
                     $this->dirSize($dir."/".$object['name']);
                 } catch (FtpException $e) {
@@ -1193,7 +1193,7 @@ class Ftp implements FtpInterface
                 }
             } else {
                 try {
-                    $size = $size + $this->size($dir."/".$object['name']);
+                    $size += $this->size($dir."/".$object['name']);
                 } catch (FtpException $e) {
                     $error = true;
                     if ($failfast) {
@@ -1502,14 +1502,14 @@ class Ftp implements FtpInterface
      */
     public function analyzeDir(string $dirline) : array
     {
-        if (substr($dirline, 0, 5) == "total") {
+        if (substr($dirline, 0, 5) === "total") {
             $this->debug("line begins with 'total'. invalid line", __FUNCTION__);
             $entry = [
                 "type" => -1,
                 "size" => 0,
                 "name" => ""
             ];
-        } elseif ($this->sysType == "Windows_NT") {
+        } elseif ($this->sysType === "Windows_NT") {
             $this->debug("server os is WINDOWS_NT", __FUNCTION__);
             if (preg_match("/[-0-9]+ *[0-9:]+[PA]?M? +<DIR> {10}(.*)/", $dirline, $regs)) {
                 $this->debug("object (".$regs[1].") is a directory", __FUNCTION__);
@@ -1533,7 +1533,7 @@ class Ftp implements FtpInterface
                     "name" => ""
                 ];
             }//end if
-        } elseif ($this->sysType == "UNIX") {
+        } elseif ($this->sysType === "UNIX") {
             $this->debug("server os is UNIX", __FUNCTION__);
             if (preg_match("/([-ld])[rwxst-]{9}.* ([0-9]*) [a-zA-Z]+ [0-9: ]*[0-9] (.+)/", $dirline, $regs)) {
                 $entry = [
@@ -1640,7 +1640,7 @@ class Ftp implements FtpInterface
         $this->debug("fileending is '".$ending."'", __FUNCTION__);
 
         // check if fileending is ascii or binary
-        if (in_array($ending, $this->ascii)) {
+        if (in_array($ending, $this->ascii, true)) {
             $this->debug("ASCII transfer", __FUNCTION__);
             return FTP_ASCII;
         }
@@ -1660,7 +1660,7 @@ class Ftp implements FtpInterface
      * @uses            Ftp::$debug
      * @uses            Ftp::$log
      */
-    private function debug(string $message, ?string $functionName = null) : void
+    private function debug(string $message, string|null $functionName = null) : void
     {
         if (!$this->debug) {
             return;
