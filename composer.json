@@ -1,6 +1,6 @@
 {
     "name": "davidlienhard/ftp",
-    "license": "proprietary",
+    "license": ["MIT"],
     "description": "🐘 php library for easy use of ftp functions",
     "keywords": [ "ftp", "php", "library" ],
     "type": "libary",
