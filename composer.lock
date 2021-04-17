@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "882703eeaf92ae49e19d02773f933b0f",
+    "content-hash": "37b92c4dd193b271e41618f13d0175d4",
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
@@ -15,10 +15,10 @@
                 "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719"
             },
             "dist": {
-                "type": "tar",
-                "url": "https://packages.tourbase.ch/dist/davidlienhard/functioncaller/davidlienhard-functioncaller-7f45fd69a8f1152a4f11179adebb7ca6dfa36719-zip-1ee647.tar",
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/7f45fd69a8f1152a4f11179adebb7ca6dfa36719",
                 "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719",
-                "shasum": "aa106d66823c61e4ff3f8078833cdca6b4344798"
+                "shasum": ""
             },
             "require": {
                 "php": "^8.0"
@@ -34,27 +34,7 @@
                     "src/"
                 ]
             },
-            "scripts": {
-                "changed-files": [
-                    "git diff --name-only origin/master"
-                ],
-                "phpcs": [
-                    "./vendor/bin/phpcs"
-                ],
-                "phpstan": [
-                    "./vendor/bin/phpstan analyse"
-                ],
-                "test": [
-                    "@phpcs",
-                    "@phpstan"
-                ],
-                "phpdoc": [
-                    "docker run --rm -v ${PWD}:/data phpdoc/phpdoc:3 run"
-                ],
-                "doc": [
-                    "@phpdoc"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
@@ -74,8 +54,8 @@
                 "php"
             ],
             "support": {
-                "issues": "https://github.com/davidlienhard/functioncaller/issues/",
                 "email": "david.lienhard@tourasia.ch",
+                "issues": "https://github.com/davidlienhard/functioncaller/issues/",
                 "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.1"
             },
             "time": "2021-04-12T09:05:20+00:00"
@@ -85,14 +65,14 @@
             "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "git@github.com:davidlienhard/log.git",
+                "url": "https://github.com/davidlienhard/log.git",
                 "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e"
             },
             "dist": {
-                "type": "tar",
-                "url": "https://packages.tourbase.ch/dist/davidlienhard/log/davidlienhard-log-963c9b4efe8af8b222c4d44c6511d954e1602e2e-zip-dfa46d.tar",
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidlienhard/log/zipball/963c9b4efe8af8b222c4d44c6511d954e1602e2e",
                 "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e",
-                "shasum": "7b114810287d558e9dc8a1776a916921cfa649ea"
+                "shasum": ""
             },
             "require": {
                 "php": "^8.0"
@@ -109,27 +89,7 @@
                     "src/"
                 ]
             },
-            "scripts": {
-                "changed-files": [
-                    "git diff --name-only origin/master"
-                ],
-                "phpunit": [
-                    "./vendor/bin/phpunit"
-                ],
-                "phpcs": [
-                    "./vendor/bin/phpcs"
-                ],
-                "phpcs-diff": [
-                    "@composer changed-files | xargs ls -d 2>/dev/null | xargs ./vendor/bin/phpcs"
-                ],
-                "phpstan": [
-                    "./vendor/bin/phpstan analyse"
-                ],
-                "test": [
-                    "@phpunit",
-                    "@phpcs"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
@@ -150,8 +110,8 @@
                 "php"
             ],
             "support": {
-                "issues": "https://github.com/davidlienhard/log/issues/",
                 "email": "david.lienhard@tourasia.ch",
+                "issues": "https://github.com/davidlienhard/log/issues/",
                 "source": "https://github.com/davidlienhard/log/tree/1.0.3"
             },
             "time": "2021-04-12T09:09:33+00:00"
@@ -167,10 +127,10 @@
                 "reference": "03f8f2e6a78c2826637fdc01d779682f941c051e"
             },
             "dist": {
-                "type": "tar",
-                "url": "https://packages.tourbase.ch/dist/davidlienhard/coding-standard/davidlienhard-coding-standard-03f8f2e6a78c2826637fdc01d779682f941c051e-zip-38ab1e.tar",
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidlienhard/coding-standard/zipball/03f8f2e6a78c2826637fdc01d779682f941c051e",
                 "reference": "03f8f2e6a78c2826637fdc01d779682f941c051e",
-                "shasum": "e6c9e4750f823b597cbc3b2475b0fd863cb8f24b"
+                "shasum": ""
             },
             "require": {
                 "php": "^8.0",
@@ -178,11 +138,7 @@
                 "squizlabs/php_codesniffer": "^3"
             },
             "type": "phpcodesniffer-standard",
-            "scripts": {
-                "changed-files": [
-                    "git diff --name-only origin/master"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "David Lienhard",
@@ -193,12 +149,12 @@
             ],
             "description": "DavidLienhard PHPCS Coding Standard",
             "keywords": [
-                "CodeSniffer",
+                "codesniffer",
                 "phpcs"
             ],
             "support": {
-                "source": "https://github.com/davidlienhard/coding-standard",
-                "issues": "https://github.com/davidlienhard/coding-standard/issues"
+                "issues": "https://github.com/davidlienhard/coding-standard/issues",
+                "source": "https://github.com/davidlienhard/coding-standard"
             },
             "time": "2021-04-13T07:09:59+00:00"
         },
@@ -384,16 +340,16 @@
         },
         {
             "name": "slevomat/coding-standard",
-            "version": "7.0.1",
+            "version": "7.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slevomat/coding-standard.git",
-                "reference": "08580348e8bb68a36c8753d3db6ba816089129e6"
+                "reference": "7815b1397bd9ff3e09bac9446ecb680f3fc69844"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/08580348e8bb68a36c8753d3db6ba816089129e6",
-                "reference": "08580348e8bb68a36c8753d3db6ba816089129e6",
+                "url": "https://api.github.com/repos/slevomat/coding-standard/zipball/7815b1397bd9ff3e09bac9446ecb680f3fc69844",
+                "reference": "7815b1397bd9ff3e09bac9446ecb680f3fc69844",
                 "shasum": ""
             },
             "require": {
@@ -429,7 +385,7 @@
             "description": "Slevomat Coding Standard for PHP_CodeSniffer complements Consistence Coding Standard by providing sniffs with additional checks.",
             "support": {
                 "issues": "https://github.com/slevomat/coding-standard/issues",
-                "source": "https://github.com/slevomat/coding-standard/tree/7.0.1"
+                "source": "https://github.com/slevomat/coding-standard/tree/7.0.2"
             },
             "funding": [
                 {
@@ -441,7 +397,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-09T12:43:58+00:00"
+            "time": "2021-04-14T18:15:42+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
