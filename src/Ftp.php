@@ -3,8 +3,8 @@
  * contains \DavidLienhard\Ftp\Ftp class
  *
  * @package         tourBase
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  */
 
 declare(strict_types=1);
@@ -24,8 +24,8 @@ use DavidLienhard\Log\LogInterface;
  * but there are also some additional functions/parameters making
  * the use of ftp functions easier.
  *
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
 */
 class Ftp implements FtpInterface
 {
@@ -113,8 +113,8 @@ class Ftp implements FtpInterface
      * checks if the php functions, the function microtime(true),
      * the classes socket and server exist.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool                                    $debug  turn debugging on or off.
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
      * @return          void
@@ -130,8 +130,8 @@ class Ftp implements FtpInterface
     /**
      * connects to the ftp-server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $host           host to connect to
      * @param           string          $user           username to connect with
      * @param           string          $pass           password to connect with. or null to use anonymous password
@@ -211,8 +211,8 @@ class Ftp implements FtpInterface
     /**
      * returns the content of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          array<int, array<string, int|string>>
      * @uses            Ftp::$ftp
@@ -266,8 +266,8 @@ class Ftp implements FtpInterface
     /**
      * returns the content of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          mixed[]
      * @uses            Ftp::$ftp
@@ -304,8 +304,8 @@ class Ftp implements FtpInterface
     /**
      * puts a file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -363,8 +363,8 @@ class Ftp implements FtpInterface
      * which puts the file on the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -378,8 +378,8 @@ class Ftp implements FtpInterface
     /**
      * puts a with {@link fopen()} opened file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -432,8 +432,8 @@ class Ftp implements FtpInterface
      * which puts the file on the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -451,8 +451,8 @@ class Ftp implements FtpInterface
     /**
      * puts a directory with all contents on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -530,8 +530,8 @@ class Ftp implements FtpInterface
     /**
      * gets a file from the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -583,8 +583,8 @@ class Ftp implements FtpInterface
      * which gets the file from the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -598,8 +598,8 @@ class Ftp implements FtpInterface
     /**
      * gets a file from the server and returs a filepointer
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -655,8 +655,8 @@ class Ftp implements FtpInterface
      * which gets the file from the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -674,8 +674,8 @@ class Ftp implements FtpInterface
     /**
      * gets a directory with all contents from the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -752,8 +752,8 @@ class Ftp implements FtpInterface
     /**
      * creates a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
@@ -787,8 +787,8 @@ class Ftp implements FtpInterface
     /**
      * changes to another directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
@@ -823,8 +823,8 @@ class Ftp implements FtpInterface
     /**
      * changes to the directory up
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      * @uses            Ftp::pwd()
@@ -859,8 +859,8 @@ class Ftp implements FtpInterface
     /**
      * changes the access rights of a file/directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int              $mode        the new access rights
      * @param           string           $filename    the filename
      * @uses            Ftp::$ftp
@@ -903,8 +903,8 @@ class Ftp implements FtpInterface
     /**
      * returns the current path
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @uses            Ftp::$ftp
      * @uses            Ftp::debug()
      * @uses            Ftp::$time
@@ -941,8 +941,8 @@ class Ftp implements FtpInterface
     /**
      * renames a file or directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $from        the current name
      * @param           string           $to          the new name
      * @uses            Ftp::$ftp
@@ -977,8 +977,8 @@ class Ftp implements FtpInterface
     /**
      * deletes directory on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $remote      the folder to delete
      * @param           bool             $recursive   recursively delete the folder or not
      * @uses            Ftp::$ftp
@@ -1088,8 +1088,8 @@ class Ftp implements FtpInterface
     /**
      * deletes file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $file      the file to delete
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
@@ -1123,8 +1123,8 @@ class Ftp implements FtpInterface
     /**
      * returns the size of a file
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
      * @uses            Ftp::$time
      */
@@ -1162,8 +1162,8 @@ class Ftp implements FtpInterface
     /**
      * returns the size of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      * @param           bool             $failfast    whether to stop as soon as an error occurs
      * @uses            Ftp::dirList()
@@ -1222,8 +1222,8 @@ class Ftp implements FtpInterface
     /**
      * enables/disables the passive mode
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool             $mode        passive mode on/off
      * @uses            Ftp::debug()
      * @uses            Ftp::$time
@@ -1264,8 +1264,8 @@ class Ftp implements FtpInterface
     /**
      * returns the date of the last modification from a file
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
      * @uses            Ftp::$time
      */
@@ -1304,8 +1304,8 @@ class Ftp implements FtpInterface
      * since site commands are not standardisized the command
      * will not be checked and just given to the ftp_site() function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $command     the command to send
      * @uses            Ftp::$time
      * @uses            Ftp::$ftp
@@ -1342,8 +1342,8 @@ class Ftp implements FtpInterface
      * since exec commands are not standardisized the command
      * will not be checked and just given to the ftp_exec() function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $command     the command to send
      * @uses            Ftp::$time
      * @uses            Ftp::$ftp
@@ -1377,8 +1377,8 @@ class Ftp implements FtpInterface
     /**
      * returns some information about the ftp connction
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int             $option      the option to return
      * @uses            Ftp::$time
      */
@@ -1414,8 +1414,8 @@ class Ftp implements FtpInterface
     /**
      * sets some information about the ftp connction
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
      * @uses            Ftp::$time
@@ -1449,8 +1449,8 @@ class Ftp implements FtpInterface
     /**
      * closes the ftp-connection
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @uses            Ftp::debug()
      * @uses            Ftp::$ftp
      * @uses            Ftp::$time
@@ -1494,8 +1494,8 @@ class Ftp implements FtpInterface
      *
      *   name (name of the file/folder)
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dirline     one line
      * @return          array<string, int|string>
      * @uses            Ftp::$sysType
@@ -1580,8 +1580,8 @@ class Ftp implements FtpInterface
     /**
      * sets the password to use for anonymous users
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $password           password to use
      * @uses            Ftp::anonymousPassword()
      */
@@ -1593,8 +1593,8 @@ class Ftp implements FtpInterface
     /**
      * turns debugging on or off
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool            $debug              turn debug on or off
      * @uses            Ftp::$debug
      */
@@ -1606,8 +1606,8 @@ class Ftp implements FtpInterface
     /**
      * returns the current state of debug
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @uses            Ftp::$debug
      */
     public function getDebug() : bool
@@ -1618,8 +1618,8 @@ class Ftp implements FtpInterface
     /**
      * checks if a file has to be up-/downloaded binary or with ascii
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $file        the filename
      * @access          private
      * @uses            Ftp::$ascii
@@ -1652,8 +1652,8 @@ class Ftp implements FtpInterface
     /**
      * prints a debug message on the screen if required
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $message        the message to print
      * @param           string|null     $functionName   the name of the function calling this method
      * @access          private
@@ -1681,8 +1681,8 @@ class Ftp implements FtpInterface
     /**
      * sanity check
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $functionName       name of the function calling this method
      * @uses            Ftp::$ftp
      */
