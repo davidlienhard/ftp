@@ -4,8 +4,8 @@
  *
  * @package         tourBase
  * @subpackage      DavidLienhard\Ftp
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  */
 
 declare(strict_types=1);
@@ -17,8 +17,8 @@ use \DavidLienhard\Ftp\Exceptions\FtpException;
 /**
  * Ftp Connect Exception Class
  *
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  */
 class ConnectException extends FtpException
 {

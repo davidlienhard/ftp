@@ -4,8 +4,8 @@
  *
  * @package         tourBase
  * @subpackage      DavidLienhard\Ftp
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  * @uses            \Exception
  */
 
@@ -16,8 +16,8 @@ namespace DavidLienhard\Ftp\Exceptions;
 /**
  * Ftp Exception Class
  *
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  */
 class FtpException extends \Exception
 {

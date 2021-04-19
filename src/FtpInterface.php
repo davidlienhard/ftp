@@ -3,8 +3,8 @@
  * contains \DavidLienhard\Ftp\FtpInterface
  *
  * @package         tourBase
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
  */
 
 declare(strict_types=1);
@@ -16,8 +16,8 @@ use \DavidLienhard\Log\LogInterface;
 /**
  * contains methods for ftp transfers
  *
- * @author          David Lienhard <david.lienhard@tourasia.ch>
- * @copyright       tourasia
+ * @author          David Lienhard <github@lienhard.win>
+ * @copyright       David Lienhard
 */
 interface FtpInterface
 {
@@ -27,8 +27,8 @@ interface FtpInterface
      * checks if the php functions, the function microtime(true),
      * the classes socket and server exist.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool                                    $debug  turn debugging on or off.
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
      * @return          void
@@ -38,8 +38,8 @@ interface FtpInterface
     /**
      * connects to the ftp-server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $host           host to connect to
      * @param           string          $user           username to connect with
      * @param           string          $pass           password to connect with. or null to use anonymous password
@@ -57,8 +57,8 @@ interface FtpInterface
     /**
      * returns the content of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          array<int, array<string, int|string>>
      */
@@ -67,8 +67,8 @@ interface FtpInterface
     /**
      * returns the content of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          string[]
      */
@@ -77,8 +77,8 @@ interface FtpInterface
     /**
      * puts a file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -94,8 +94,8 @@ interface FtpInterface
      * which puts the file on the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -105,8 +105,8 @@ interface FtpInterface
     /**
      * puts a with {@link fopen()} opened file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -122,8 +122,8 @@ interface FtpInterface
      * which puts the file on the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -133,8 +133,8 @@ interface FtpInterface
     /**
      * puts a directory with all contents on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -150,8 +150,8 @@ interface FtpInterface
     /**
      * gets a file from the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -171,8 +171,8 @@ interface FtpInterface
      * which gets the file from the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -186,8 +186,8 @@ interface FtpInterface
     /**
      * gets a file from the server and returs a filepointer
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -207,8 +207,8 @@ interface FtpInterface
      * which gets the file from the server. see the parameter
      * $nb in this function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -222,8 +222,8 @@ interface FtpInterface
     /**
      * gets a directory with all contents from the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $local       the local directory
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
@@ -239,8 +239,8 @@ interface FtpInterface
     /**
      * creates a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      */
     public function mkdir(string $dir) : void;
@@ -248,8 +248,8 @@ interface FtpInterface
     /**
      * changes to another directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      */
     public function chDir(string $dir) : void;
@@ -257,16 +257,16 @@ interface FtpInterface
     /**
      * changes to the directory up
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      */
     public function cdup() : void;
 
     /**
      * changes the access rights of a file/directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int              $mode        the new access rights
      * @param           string           $filename    the filename
      */
@@ -275,16 +275,16 @@ interface FtpInterface
     /**
      * returns the current path
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      */
     public function pwd() : string;
 
     /**
      * renames a file or directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $from        the current name
      * @param           string           $to          the new name
      */
@@ -293,8 +293,8 @@ interface FtpInterface
     /**
      * deletes directory on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $remote      the folder to delete
      * @param           bool             $recursive   recursively delete the folder or not
      */
@@ -303,8 +303,8 @@ interface FtpInterface
     /**
      * deletes file on the server
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $file      the file to delete
      */
     public function delete(string $file) : void;
@@ -312,8 +312,8 @@ interface FtpInterface
     /**
      * returns the size of a file
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
      */
     public function size(string $filename) : int;
@@ -321,8 +321,8 @@ interface FtpInterface
     /**
      * returns the size of a directory
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      * @param           bool             $failfast    whether to stop as soon as an error occurs
      */
@@ -331,8 +331,8 @@ interface FtpInterface
     /**
      * enables/disables the passive mode
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool             $mode        passive mode on/off
      */
     public function pasv(bool $mode) : void;
@@ -340,8 +340,8 @@ interface FtpInterface
     /**
      * returns the date of the last modification from a file
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
      */
     public function mdtm(string $filename) : int;
@@ -352,8 +352,8 @@ interface FtpInterface
      * since site commands are not standardisized the command
      * will not be checked and just given to the ftp_site() function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $command     the command to send
      */
     public function site(string $command) : void;
@@ -364,8 +364,8 @@ interface FtpInterface
      * since exec commands are not standardisized the command
      * will not be checked and just given to the ftp_exec() function.
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $command     the command to send
      */
     public function exec(string $command) : void;
@@ -373,8 +373,8 @@ interface FtpInterface
     /**
      * returns some information about the ftp connction
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int             $option      the option to return
      */
     public function get_option(int $option): mixed;
@@ -382,8 +382,8 @@ interface FtpInterface
     /**
      * sets some information about the ftp connction
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
      */
@@ -392,16 +392,16 @@ interface FtpInterface
     /**
      * closes the ftp-connection
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      */
     public function close() : void;
 
     /**
      * analyses a line returned by ftp_rawlist
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string           $dirline     one line
      * @return          string[]
      */
@@ -410,8 +410,8 @@ interface FtpInterface
     /**
      * sets the password to use for anonymous users
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           string          $password           password to use
      */
     public function setAnonymousPassword(string $password) : void;
@@ -419,8 +419,8 @@ interface FtpInterface
     /**
      * turns debugging on or off
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      * @param           bool            $debug              turn debug on or off
      */
     public function setDebug(bool $debug = false) : void;
@@ -428,8 +428,8 @@ interface FtpInterface
     /**
      * returns the current state of debug
      *
-     * @author          David Lienhard <david@t-error.ch>
-     * @copyright       t-error.ch
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
      */
     public function getDebug() : bool;
 }
