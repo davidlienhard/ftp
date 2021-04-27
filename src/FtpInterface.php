@@ -2,7 +2,6 @@
 /**
  * contains \DavidLienhard\Ftp\FtpInterface
  *
- * @package         tourBase
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard
  */

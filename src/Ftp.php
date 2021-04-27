@@ -2,7 +2,6 @@
 /**
  * contains \DavidLienhard\Ftp\Ftp class
  *
- * @package         tourBase
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard
  */
@@ -118,8 +117,6 @@ class Ftp implements FtpInterface
      * @param           bool                                    $debug  turn debugging on or off.
      * @param           \DavidLienhard\Log\LogInterface|null    $log    optional logging object for debugging
      * @return          void
-     * @uses            Ftp::$debug
-     * @uses            Ftp::$log
      */
     public function __construct(private bool $debug = false, private LogInterface|null $log = null)
     {
@@ -137,14 +134,6 @@ class Ftp implements FtpInterface
      * @param           string          $pass           password to connect with. or null to use anonymous password
      * @param           int             $port           port to connect to
      * @param           int             $timeout        timeout in seconds
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$host
-     * @uses            Ftp::$user
-     * @uses            Ftp::$pass
-     * @uses            Ftp::$timeout
-     * @uses            Ftp::$anonymousPassword
-     * @uses            Ftp::$sysType
      */
     public function connect(
         string $host,
@@ -215,9 +204,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          array<int, array<string, int|string>>
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::analyzeDir()
-     * @uses            Ftp::debug()
      */
     public function dirList(string $dir = "./") : array
     {
@@ -270,8 +256,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string          $dir        the directory
      * @return          mixed[]
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::debug()
      */
     public function nList(string $dir = "./") : array
     {
@@ -310,12 +294,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_put())
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::getMode()
-     * @uses            Ftp::debug()
-     * @uses            FTP_ASCII
-     * @uses            FTP_BINARY
-     * @uses            FTP_FAILED
      */
     public function put(string $local, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
@@ -368,7 +346,6 @@ class Ftp implements FtpInterface
      * @param           string           $local       the local file
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @uses            Ftp::put()
      */
     public function nb_put(string $local, string $remote, int|string $mode = "auto") : void
     {
@@ -384,9 +361,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fput())
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::getMode()
-     * @uses            Ftp::debug()
      */
     public function fput($fp, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
@@ -437,7 +411,6 @@ class Ftp implements FtpInterface
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @uses            Ftp::fput()
      */
     public function nb_fput($fp, string $remote, int|string $mode = "auto") : void
     {
@@ -457,9 +430,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @uses            Ftp::mkdir()
-     * @uses            Ftp::putDir()
-     * @uses            Ftp::put()
      */
     public function putDir(string $local, string $remote, int|string $mode = "auto", bool $failfast = true) : void
     {
@@ -536,12 +506,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_get())
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::getMode()
-     * @uses            Ftp::$time
-     * @uses            Ftp::debug()
-     * @uses            FTP_ASCII
-     * @uses            FTP_BINARY
      */
     public function get(string $local, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
@@ -588,7 +552,6 @@ class Ftp implements FtpInterface
      * @param           string           $local       the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @uses            Ftp::fget()
      */
     public function nb_get(string $local, string $remote, int|string $mode = "auto") : void
     {
@@ -604,13 +567,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $nb          put the file not blocking on the server (ftp_nb_fget())
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::getMode()
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$time
-     * @uses            FTP_ASCII
-     * @uses            FTP_BINARY
-     * @uses            FTP_FAILED
      */
     public function fget($fp, string $remote, int|string $mode = "auto", bool $nb = false) : void
     {
@@ -660,7 +616,6 @@ class Ftp implements FtpInterface
      * @param           resource         $fp          the local filepointer
      * @param           string           $remote      the remote file
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
-     * @uses            Ftp::fget()
      */
     public function nb_fget($fp, string $remote, int|string $mode = "auto") : void
     {
@@ -680,9 +635,6 @@ class Ftp implements FtpInterface
      * @param           string           $remote      the remote directory
      * @param           int|string       $mode        auto for autodetect or FTP_ASCII for ascii or FTP_BINARY for binary upload
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @uses            Ftp::dirList()
-     * @uses            Ftp::getDir()
-     * @uses            Ftp::get()
      */
     public function getDir(string $local, string $remote, int|string $mode = "auto", bool $failfast = true) : void
     {
@@ -755,8 +707,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$time
      */
     public function mkdir(string $dir) : void
     {
@@ -790,9 +740,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$time
      */
     public function chDir(string $dir) : void
     {
@@ -825,11 +772,6 @@ class Ftp implements FtpInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::debug()
-     * @uses            Ftp::pwd()
-     * @uses            Ftp::chDir()
-     * @uses            Ftp::$time
      */
     public function cdup() : void
     {
@@ -863,10 +805,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           int              $mode        the new access rights
      * @param           string           $filename    the filename
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::site()
-     * @uses            Ftp::$time
-     * @uses            Ftp::debug()
      */
     public function chmod(int $mode, string $filename) : void
     {
@@ -905,9 +843,6 @@ class Ftp implements FtpInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$time
      */
     public function pwd() : string
     {
@@ -945,8 +880,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string           $from        the current name
      * @param           string           $to          the new name
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$time
      */
     public function rename(string $from, string $to) : void
     {
@@ -981,12 +914,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string           $remote      the folder to delete
      * @param           bool             $recursive   recursively delete the folder or not
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$time
-     * @uses            Ftp::rawlist()
-     * @uses            Ftp::delete()
-     * @uses            Ftp::rmdir()
-     * @uses            Ftp::$time
      */
     public function rmdir(string $remote, bool $recursive = false) : void
     {
@@ -1091,8 +1018,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $file      the file to delete
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$time
      */
     public function delete(string $file) : void
     {
@@ -1126,7 +1051,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
-     * @uses            Ftp::$time
      */
     public function size(string $filename) : int
     {
@@ -1166,8 +1090,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string           $dir         the name of the directory
      * @param           bool             $failfast    whether to stop as soon as an error occurs
-     * @uses            Ftp::dirList()
-     * @uses            Ftp::size()
      */
     public function dirSize(string $dir, bool $failfast = false) : int
     {
@@ -1225,8 +1147,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           bool             $mode        passive mode on/off
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$time
      */
     public function pasv(bool $mode) : void
     {
@@ -1267,7 +1187,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $filename    the name of the file
-     * @uses            Ftp::$time
      */
     public function mdtm(string $filename) : int
     {
@@ -1307,8 +1226,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $command     the command to send
-     * @uses            Ftp::$time
-     * @uses            Ftp::$ftp
      */
     public function site(string $command) : void
     {
@@ -1345,8 +1262,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string           $command     the command to send
-     * @uses            Ftp::$time
-     * @uses            Ftp::$ftp
      */
     public function exec(string $command) : void
     {
@@ -1380,7 +1295,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           int             $option      the option to return
-     * @uses            Ftp::$time
      */
     public function get_option(int $option): mixed
     {
@@ -1418,7 +1332,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           int             $option         the option to set
      * @param           mixed           $value          value of the option to set
-     * @uses            Ftp::$time
      */
     public function set_option(int $option, mixed $value) : void
     {
@@ -1451,9 +1364,6 @@ class Ftp implements FtpInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @uses            Ftp::debug()
-     * @uses            Ftp::$ftp
-     * @uses            Ftp::$time
      */
     public function close() : void
     {
@@ -1498,7 +1408,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string           $dirline     one line
      * @return          array<string, int|string>
-     * @uses            Ftp::$sysType
      */
     public function analyzeDir(string $dirline) : array
     {
@@ -1583,7 +1492,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string          $password           password to use
-     * @uses            Ftp::anonymousPassword()
      */
     public function setAnonymousPassword(string $password) : void
     {
@@ -1596,7 +1504,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           bool            $debug              turn debug on or off
-     * @uses            Ftp::$debug
      */
     public function setDebug(bool $debug = false) : void
     {
@@ -1608,7 +1515,6 @@ class Ftp implements FtpInterface
      *
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
-     * @uses            Ftp::$debug
      */
     public function getDebug() : bool
     {
@@ -1622,9 +1528,6 @@ class Ftp implements FtpInterface
      * @copyright       David Lienhard
      * @param           string           $file        the filename
      * @access          private
-     * @uses            Ftp::$ascii
-     * @uses            FTP_ASCII
-     * @uses            FTP_BINARY
      */
     private function getMode(string $file) : int
     {
@@ -1657,8 +1560,6 @@ class Ftp implements FtpInterface
      * @param           string          $message        the message to print
      * @param           string|null     $functionName   the name of the function calling this method
      * @access          private
-     * @uses            Ftp::$debug
-     * @uses            Ftp::$log
      */
     private function debug(string $message, string|null $functionName = null) : void
     {
@@ -1684,7 +1585,6 @@ class Ftp implements FtpInterface
      * @author          David Lienhard <github@lienhard.win>
      * @copyright       David Lienhard
      * @param           string          $functionName       name of the function calling this method
-     * @uses            Ftp::$ftp
      */
     private function sanityCheck(string $functionName) : void
     {

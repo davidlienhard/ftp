@@ -2,8 +2,6 @@
 /**
  * FTP Login Exception Class
  *
- * @package         tourBase
- * @subpackage      DavidLienhard\Ftp
  * @author          David Lienhard <github@lienhard.win>
  * @copyright       David Lienhard
  */
