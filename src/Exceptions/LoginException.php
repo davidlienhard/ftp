@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace DavidLienhard\Ftp\Exceptions;
 
-use \DavidLienhard\Ftp\Exceptions\FtpException;
+use DavidLienhard\Ftp\Exceptions\FtpException;
 
 /**
  * Ftp Login Exception Class

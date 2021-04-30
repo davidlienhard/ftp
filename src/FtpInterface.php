@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace DavidLienhard\Ftp;
 
-use \DavidLienhard\Log\LogInterface;
+use DavidLienhard\Log\LogInterface;
 
 /**
  * contains methods for ftp transfers
