@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/functioncaller.git",
-                "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719"
+                "reference": "a3933b6cae45be9a237bff91671570852c28f03d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/7f45fd69a8f1152a4f11179adebb7ca6dfa36719",
-                "reference": "7f45fd69a8f1152a4f11179adebb7ca6dfa36719",
+                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/a3933b6cae45be9a237bff91671570852c28f03d",
+                "reference": "a3933b6cae45be9a237bff91671570852c28f03d",
                 "shasum": ""
             },
             "require": {
@@ -36,17 +36,17 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "authors": [
                 {
                     "name": "David Lienhard",
-                    "email": "david.lienhard@tourasia.ch",
-                    "homepage": "http://www.tourasia.ch/",
+                    "email": "github@lienhard.win",
+                    "homepage": "http://www.lienhard.win/",
                     "role": "Developer"
                 }
             ],
-            "description": "🐘 php library to call functions and ctahc triggered errors",
+            "description": "🐘 php library to call functions and catch triggered errors",
             "homepage": "https://github.com/davidlienhard/functioncaller/",
             "keywords": [
                 "errorhandler",
@@ -54,24 +54,24 @@
                 "php"
             ],
             "support": {
-                "email": "david.lienhard@tourasia.ch",
+                "email": "github@lienhard.win",
                 "issues": "https://github.com/davidlienhard/functioncaller/issues/",
-                "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.1"
+                "source": "https://github.com/davidlienhard/functioncaller/tree/1.0.2"
             },
-            "time": "2021-04-12T09:05:20+00:00"
+            "time": "2021-04-30T14:02:51+00:00"
         },
         {
             "name": "davidlienhard/log",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/log.git",
-                "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e"
+                "reference": "fb80706e591c5e6ea33cecfca41eb54c03211f8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davidlienhard/log/zipball/963c9b4efe8af8b222c4d44c6511d954e1602e2e",
-                "reference": "963c9b4efe8af8b222c4d44c6511d954e1602e2e",
+                "url": "https://api.github.com/repos/davidlienhard/log/zipball/fb80706e591c5e6ea33cecfca41eb54c03211f8a",
+                "reference": "fb80706e591c5e6ea33cecfca41eb54c03211f8a",
                 "shasum": ""
             },
             "require": {
@@ -91,13 +91,13 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "authors": [
                 {
                     "name": "David Lienhard",
-                    "email": "david.lienhard@tourasia.ch",
-                    "homepage": "http://www.tourasia.ch/",
+                    "email": "github@lienhard.win",
+                    "homepage": "http://www.lienhard.win/",
                     "role": "Developer"
                 }
             ],
@@ -110,11 +110,11 @@
                 "php"
             ],
             "support": {
-                "email": "david.lienhard@tourasia.ch",
+                "email": "github@lienhard.win",
                 "issues": "https://github.com/davidlienhard/log/issues/",
-                "source": "https://github.com/davidlienhard/log/tree/1.0.3"
+                "source": "https://github.com/davidlienhard/log/tree/1.0.4"
             },
-            "time": "2021-04-12T09:09:33+00:00"
+            "time": "2021-04-30T16:11:54+00:00"
         }
     ],
     "packages-dev": [
