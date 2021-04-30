@@ -940,7 +940,6 @@ class Ftp implements FtpInterface
         }
 
         // init
-        $i = 0;
         $files = $folders = [];
         $statusnext = false;
         $currentfolder = $remote;
