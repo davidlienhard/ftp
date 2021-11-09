@@ -162,7 +162,7 @@ class Ftp implements FtpInterface
         $ftp = $caller->getResult();
 
         // connection failed
-        if ($ftp === false) {
+        if (!is_resource($ftp) || get_resource_type($ftp) !== "ftp") {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("connection failed".$errmsg, __FUNCTION__);
