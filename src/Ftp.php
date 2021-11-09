@@ -65,36 +65,6 @@ class Ftp implements FtpInterface
     /** the time used for ftp connections */
     private float $time = 0;
 
-    /** the hostname to connect to */
-    private string $host;
-
-    /** the port to connect to */
-    private int $port;
-
-    /** the connection timeout */
-    private int $timeout;
-
-    /** the username to login with */
-    private string $user;
-
-    /** the password to login with */
-    private string|null $pass;
-
-    /**
-     * the range to calculate the portnumber
-     * for active connections if the php functions
-     * are not enabled.
-     * @var     int[]
-     */
-    private array $portrange = [ 150, 200 ];
-
-    /**
-     * the ip of this server (the php client)
-     * used for active connections without
-     * the php functions
-     */
-    private string|null $ip = null;
-
     /** passive mode */
     private bool $pasv = false;
 
@@ -142,12 +112,6 @@ class Ftp implements FtpInterface
         int $timeout = 30
     ) : void {
         $start = microtime(true);
-
-        $this->host = $host;
-        $this->user = $user;
-        $this->pass = $pass;
-        $this->port = $port;
-        $this->timeout = $timeout;
 
         // check if a password is set
         // if not, use the anonymous password
