@@ -126,7 +126,7 @@ class Ftp implements FtpInterface
         $ftp = $caller->getResult();
 
         // connection failed
-        if ($ftp === false) {
+        if (!is_resource($ftp) || get_resource_type($ftp) !== "ftp") {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("connection failed".$errmsg, __FUNCTION__);
@@ -151,7 +151,7 @@ class Ftp implements FtpInterface
         // set servers system type
         $caller = new FunctionCaller("ftp_systype", $this->ftp);
         $sysType = $caller->getResult();
-        $sysType = $sysType !== false ? $sysType : "";
+        $this->sysType = strval($sysType ?: "");
 
 
         // add time used
@@ -178,7 +178,7 @@ class Ftp implements FtpInterface
         $caller = new FunctionCaller("ftp_rawlist", $this->ftp, $dir);
         $list = $caller->getResult();
 
-        if ($list === false) {
+        if (!is_array($list)) {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get rawlist".$errmsg, __FUNCTION__);
@@ -230,7 +230,7 @@ class Ftp implements FtpInterface
         $caller = new FunctionCaller("ftp_nlist", $this->ftp, $dir);
         $list = $caller->getResult();
 
-        if ($list === false) {
+        if (!is_array($list)) {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get directory list from server".$errmsg, __FUNCTION__);
@@ -788,7 +788,7 @@ class Ftp implements FtpInterface
                 $this->site("CHMOD ".$mode." ".$filename);
             } catch (FtpException $e) {
                 $this->debug("could not change the mode of '".$filename."' to '".$mode."'", __FUNCTION__);
-                throw new FtpException("could not change the mode of '".$filename."' to '".$mode."'", $e->getCode(), $e);
+                throw new FtpException("could not change the mode of '".$filename."' to '".$mode."'", intval($e->getCode()), $e);
             }
         }
 
@@ -818,7 +818,7 @@ class Ftp implements FtpInterface
         $caller = new FunctionCaller("ftp_pwd", $this->ftp);
         $folder = $caller->getResult();
 
-        if ($folder === false) {
+        if (!is_string($folder)) {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("could not get working directory".$errmsg, __FUNCTION__);
@@ -911,7 +911,7 @@ class Ftp implements FtpInterface
         $caller = new FunctionCaller("ftp_rawlist", $this->ftp, $remote, true);
         $list = $caller->getResult();
 
-        if ($list === false) {
+        if (!is_array($list)) {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("unable to get raw list".$errmsg, __FUNCTION__);
@@ -920,6 +920,7 @@ class Ftp implements FtpInterface
 
         // iterate listing
         foreach ($list as $current) {
+            $current = strval($current);
             // an empty element means the next element will be the new folder
             if (empty($current)) {
                 $statusnext = true;
@@ -1159,7 +1160,7 @@ class Ftp implements FtpInterface
         $this->debug("getting last modification date from file '".$filename."'", __FUNCTION__);
 
         $caller = new FunctionCaller("ftp_mdtm", $this->ftp, $filename);
-        $time = $caller->getResult();
+        $time = intval($caller->getResult());
 
         if ($time === -1) {
             $lastError = $caller->getLastError()?->getErrstr();
