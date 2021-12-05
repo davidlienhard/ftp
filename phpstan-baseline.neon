@@ -19,24 +19,3 @@ parameters:
 			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp\\:\\:\\$ftp has unknown class Ftp\\\\Connection as its type\\.$#"
 			count: 1
 			path: src/Ftp.php
-
-		-
-			message: "#^Class Ftp\\\\Connection not found\\.$#"
-			count: 1
-			path: src/Ftp2.php
-
-		-
-			message: "#^Parameter \\#1 \\$ftp of function ftp_rmdir expects resource, Ftp\\\\Connection\\|resource given\\.$#"
-			count: 1
-			path: src/Ftp2.php
-
-		-
-			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp\\:\\:\\$ftp \\(Ftp\\\\Connection\\|resource\\) does not accept mixed\\.$#"
-			count: 1
-			path: src/Ftp2.php
-
-		-
-			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp\\:\\:\\$ftp has unknown class Ftp\\\\Connection as its type\\.$#"
-			count: 1
-			path: src/Ftp2.php
-
