@@ -8,6 +8,3 @@ parameters:
 			message: "#^Parameter \\#1 \\$ftp of function ftp_rmdir expects resource, FTP\\\\Connection\\|resource given\\.$#"
 			count: 1
 			path: src/Ftp.php
-
-
-
