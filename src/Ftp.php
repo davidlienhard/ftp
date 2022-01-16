@@ -14,6 +14,7 @@ use DavidLienhard\Ftp\Exceptions\FtpException;
 use DavidLienhard\Ftp\Exceptions\LoginException as FtpLoginException;
 use DavidLienhard\FunctionCaller\Call as FunctionCaller;
 use DavidLienhard\Log\LogInterface;
+use Ftp\Connection as FtpConnection;
 
 /**
  * contains methods for ftp transfers
@@ -70,7 +71,7 @@ class Ftp implements FtpInterface
 
     /**
      * The ftp connection resource
-     * @var     resource
+     * @var     resource|FtpConnection
      */
     private $ftp;
 
@@ -126,7 +127,7 @@ class Ftp implements FtpInterface
         $ftp = $caller->getResult();
 
         // connection failed
-        if (!is_resource($ftp) || get_resource_type($ftp) !== "ftp") {
+        if (!self::isFtpConnection($ftp)) {
             $lastError = $caller->getLastError()?->getErrstr();
             $errmsg = $lastError !== null ? " (".$lastError.")" : "";
             $this->debug("connection failed".$errmsg, __FUNCTION__);
@@ -1551,9 +1552,23 @@ class Ftp implements FtpInterface
      */
     private function sanityCheck(string $functionName) : void
     {
-        if (!is_resource($this->ftp)) {
-            $this->debug("\$this->ftp is no resource", $functionName);
-            throw new FtpException("\$this->ftp is no resource");
+        if (!self::isFtpConnection($this->ftp)) {
+            $this->debug("\$this->ftp is not a valid connection", $functionName);
+            throw new FtpException("\$this->ftp is not a valid connection");
         }
+    }
+
+    /**
+     * checks whether the given argument is a valid ftp connection
+     *
+     * @author          David Lienhard <github@lienhard.win>
+     * @copyright       David Lienhard
+     * @param           mixed           $connection     connection to check
+     */
+    private static function isFtpConnection(mixed $connection) : bool
+    {
+        return
+            $connection instanceof FtpConnection ||
+            (\is_resource($connection) && \get_resource_type($connection) === "FTP Buffer");
     }
 }
