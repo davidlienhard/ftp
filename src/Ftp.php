@@ -72,7 +72,7 @@ class Ftp implements FtpInterface
     /**
      * The ftp connection
      */
-    private \FtpConnection $ftp;
+    private FtpConnection $ftp;
 
 
     /**
