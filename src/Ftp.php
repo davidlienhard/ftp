@@ -71,9 +71,8 @@ class Ftp implements FtpInterface
 
     /**
      * The ftp connection
-     * @var     FtpConnection
      */
-    private $ftp;
+    private \FtpConnection $ftp;
 
 
     /**
