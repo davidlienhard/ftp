@@ -70,8 +70,8 @@ class Ftp implements FtpInterface
     private bool $pasv = false;
 
     /**
-     * The ftp connection resource
-     * @var     resource|FtpConnection
+     * The ftp connection
+     * @var     FtpConnection
      */
     private $ftp;
 
