@@ -1,10 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp::\\$ftp \\(FTP\\\\Connection\\|resource\\) does not accept mixed\\.$#"
-			count: 1
-			path: src/Ftp.php
-		-
-			message: "#^Parameter \\#1 \\$ftp of function ftp_rmdir expects resource, FTP\\\\Connection\\|resource given\\.$#"
+			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp::\\$ftp \\(FTP\\\\Connection\\) does not accept mixed\\.$#"
 			count: 1
 			path: src/Ftp.php
