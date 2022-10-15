@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/functioncaller.git",
-                "reference": "5d56bbeea92b554e9d18ed5a57fbb8ea46c72f64"
+                "reference": "902bf18bea7dd0179e2b5a26f555e86be043998b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/5d56bbeea92b554e9d18ed5a57fbb8ea46c72f64",
-                "reference": "5d56bbeea92b554e9d18ed5a57fbb8ea46c72f64",
+                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/902bf18bea7dd0179e2b5a26f555e86be043998b",
+                "reference": "902bf18bea7dd0179e2b5a26f555e86be043998b",
                 "shasum": ""
             },
             "require": {
@@ -25,7 +25,7 @@
             },
             "require-dev": {
                 "davidlienhard/coding-standard": "^1",
-                "phpstan/phpstan": "^0",
+                "phpstan/phpstan": "^1",
                 "squizlabs/php_codesniffer": "^3"
             },
             "type": "libary",
@@ -56,9 +56,9 @@
             "support": {
                 "email": "github@lienhard.win",
                 "issues": "https://github.com/davidlienhard/functioncaller/issues/",
-                "source": "https://github.com/davidlienhard/functioncaller/tree/1.1.0"
+                "source": "https://github.com/davidlienhard/functioncaller/tree/1.1.1"
             },
-            "time": "2021-05-10T09:47:06+00:00"
+            "time": "2022-10-15T15:54:59+00:00"
         },
         {
             "name": "davidlienhard/log",
