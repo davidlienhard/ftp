@@ -62,16 +62,16 @@
         },
         {
             "name": "davidlienhard/log",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/log.git",
-                "reference": "5d6eacb3c5f4d940e2f87530d0c3f47d0ae01025"
+                "reference": "400827ba11706c61a72da0d32b0268c73052a74c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davidlienhard/log/zipball/5d6eacb3c5f4d940e2f87530d0c3f47d0ae01025",
-                "reference": "5d6eacb3c5f4d940e2f87530d0c3f47d0ae01025",
+                "url": "https://api.github.com/repos/davidlienhard/log/zipball/400827ba11706c61a72da0d32b0268c73052a74c",
+                "reference": "400827ba11706c61a72da0d32b0268c73052a74c",
                 "shasum": ""
             },
             "require": {
@@ -112,9 +112,9 @@
             "support": {
                 "email": "github@lienhard.win",
                 "issues": "https://github.com/davidlienhard/log/issues/",
-                "source": "https://github.com/davidlienhard/log/tree/1.0.5"
+                "source": "https://github.com/davidlienhard/log/tree/1.0.6"
             },
-            "time": "2021-11-08T20:59:45+00:00"
+            "time": "2022-10-15T18:14:59+00:00"
         }
     ],
     "packages-dev": [
