@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5206a5bd2d90b2a1051a65adf46512d9",
+    "content-hash": "d0a2e4dcf5c3f3c20c24f2bff63c9a1a",
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
@@ -464,8 +464,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0",
-        "ext-ftp": "^8.0"
+        "php": "^8.1",
+        "ext-ftp": "^8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
