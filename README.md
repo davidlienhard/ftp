@@ -15,7 +15,7 @@ You can install through `composer` with:
 composer require davidlienhard/ftp:^1
 ```
 
-*Note: davidlienhard/ftp requires PHP 8.0*
+*Note: davidlienhard/ftp requires PHP 8.1*
 
 ## License
 
