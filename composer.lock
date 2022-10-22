@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "davidlienhard/functioncaller",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/davidlienhard/functioncaller.git",
-                "reference": "902bf18bea7dd0179e2b5a26f555e86be043998b"
+                "reference": "8db871e601420ab23a8f61b35c4b07526b3dd956"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/902bf18bea7dd0179e2b5a26f555e86be043998b",
-                "reference": "902bf18bea7dd0179e2b5a26f555e86be043998b",
+                "url": "https://api.github.com/repos/davidlienhard/functioncaller/zipball/8db871e601420ab23a8f61b35c4b07526b3dd956",
+                "reference": "8db871e601420ab23a8f61b35c4b07526b3dd956",
                 "shasum": ""
             },
             "require": {
@@ -56,9 +56,9 @@
             "support": {
                 "email": "github@lienhard.win",
                 "issues": "https://github.com/davidlienhard/functioncaller/issues/",
-                "source": "https://github.com/davidlienhard/functioncaller/tree/1.1.1"
+                "source": "https://github.com/davidlienhard/functioncaller/tree/1.1.2"
             },
-            "time": "2022-10-15T15:54:59+00:00"
+            "time": "2022-10-22T08:48:32+00:00"
         },
         {
             "name": "davidlienhard/log",
