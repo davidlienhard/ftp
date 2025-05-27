@@ -1388,14 +1388,14 @@ class Ftp implements FtpInterface
                 $entry = [
                     "type" => 1,
                     "size" => 0,
-                    "name" => $regs[1] ?? ""
+                    "name" => $regs[1]
                 ];
             } elseif (preg_match("/[-0-9]+ *[0-9:]+[PA]?M? +([0-9]+) (.*)/", $dirline, $regs)) {
                 $this->debug("object (".$regs[2].") is a file", __FUNCTION__);
                 $entry = [
                     "type" => 0,
-                    "size" => intval($regs[1] ?? 0),
-                    "name" => $regs[2] ?? ""
+                    "size" => intval($regs[1]),
+                    "name" => $regs[2]
                 ];
             } else {
                 $this->debug("invalid line", __FUNCTION__);
@@ -1410,15 +1410,15 @@ class Ftp implements FtpInterface
             if (preg_match("/([-ld])[rwxst-]{9}.* ([0-9]*) [a-zA-Z]+ [0-9: ]*[0-9] (.+)/", $dirline, $regs)) {
                 $entry = [
                     "type" => -1,
-                    "size" => intval($regs[2] ?? 0),
-                    "name" => $regs[3] ?? ""
+                    "size" => intval($regs[2]),
+                    "name" => $regs[3]
                 ];
 
-                if (($regs[1] ?? "") === "d") {
+                if ($regs[1] === "d") {
                     $entry['type'] = 1;
-                } elseif (($regs[1] ?? "") === "l") {
+                } elseif ($regs[1] === "l") {
                     $entry['type'] = 2;
-                    if (preg_match("/(.+) ->.*/", $entry['name'], $regs) && $regs !== false && isset($regs[1])) {
+                    if (preg_match("/(.+) ->.*/", $entry['name'], $regs) !== false) {
                         $entry['name'] = $regs[1];
                     }
                 } else {
