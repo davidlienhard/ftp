@@ -1,6 +1,2 @@
 parameters:
 	ignoreErrors:
-		-
-			message: "#^Property DavidLienhard\\\\Ftp\\\\Ftp::\\$ftp \\(FTP\\\\Connection\\) does not accept mixed\\.$#"
-			count: 1
-			path: src/Ftp.php
