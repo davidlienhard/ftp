@@ -18,8 +18,8 @@
         "email": "github@lienhard.win"
     },
     "require": {
-        "php": "^8.1",
-        "ext-ftp": "^8.1",
+        "php": "^8.4",
+        "ext-ftp": "^8.4",
         "davidlienhard/log": "^1",
         "davidlienhard/functioncaller": "^1"
     },
