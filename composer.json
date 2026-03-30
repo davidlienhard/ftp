@@ -24,7 +24,7 @@
         "davidlienhard/functioncaller": "^1"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^3",
+        "squizlabs/php_codesniffer": "^4",
         "phpstan/phpstan": "^2",
         "davidlienhard/coding-standard": "^1"
     },
