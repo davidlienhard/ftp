@@ -36,7 +36,7 @@
     "scripts": {
         "changed-files": "git diff --name-only origin/master",
         "phpcs": "./vendor/bin/phpcs",
-        "phpcs-diff": "@composer changed-files | xargs ls -d 2>/dev/null | xargs ./vendor/bin/phpcs",
+        "phpcs-diff": "composer changed-files | grep -E '\\.php$' | xargs -d '\\n' -r ./vendor/bin/phpcs",
         "phpstan": "./vendor/bin/phpstan analyse",
         "test": [
             "@phpcs",
